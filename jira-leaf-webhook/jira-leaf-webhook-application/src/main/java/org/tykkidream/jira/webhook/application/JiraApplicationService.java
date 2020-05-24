@@ -1,6 +1,5 @@
 package org.tykkidream.jira.webhook.application;
 
-import org.springframework.stereotype.Service;
 import org.tykkidream.jira.webhook.domain.forward.ForwardMessageService;
 import org.tykkidream.jira.webhook.domain.model.WebHookEvent;
 import org.tykkidream.jira.webhook.domain.model.WebHookMessage;
@@ -9,7 +8,6 @@ import org.tykkidream.jira.webhook.util.JsonUtil;
 
 import javax.annotation.Resource;
 
-@Service
 public class JiraApplicationService {
 
 	@Resource

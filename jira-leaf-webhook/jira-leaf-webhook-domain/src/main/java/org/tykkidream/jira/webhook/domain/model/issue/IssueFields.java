@@ -7,6 +7,7 @@ import org.tykkidream.jira.webhook.domain.model.watches.Watches;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class IssueFields {
 	private IssueType issueType;
@@ -36,7 +37,7 @@ public class IssueFields {
 
 	private String resolution;
 
-	private List<String> timetracking;
+	private Map timetracking;
 
 	private String customfield_10105;
 
@@ -78,7 +79,7 @@ public class IssueFields {
 
 	private String customfield_10000;
 
-	private String aggregateprogress;
+	private Map aggregateprogress;
 
 	/**
 	 * 优先级
@@ -227,11 +228,11 @@ public class IssueFields {
 		}
 	}
 
-	public List<String> getTimetracking() {
+	public Map getTimetracking() {
 		return timetracking;
 	}
 
-	public void setTimetracking(List<String> timetracking) {
+	public void setTimetracking(Map timetracking) {
 		if (timetracking != null) {
 			this.timetracking = timetracking;
 		}
@@ -377,11 +378,11 @@ public class IssueFields {
 		}
 	}
 
-	public String getAggregateprogress() {
+	public Map getAggregateprogress() {
 		return aggregateprogress;
 	}
 
-	public void setAggregateprogress(String aggregateprogress) {
+	public void setAggregateprogress(Map aggregateprogress) {
 		if (aggregateprogress != null) {
 			this.aggregateprogress = aggregateprogress;
 		}

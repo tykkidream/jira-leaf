@@ -5,8 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
+@ImportResource(locations="classpath:META-INF/spring/jira-leaf-webhook-*.xml")
 public class JiraLeafWebHookApplication extends SpringBootServletInitializer {
     private static final Logger logger = LoggerFactory.getLogger(JiraLeafWebHookApplication.class);
 
