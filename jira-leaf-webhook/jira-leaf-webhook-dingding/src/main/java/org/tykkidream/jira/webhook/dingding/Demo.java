@@ -1,4 +1,4 @@
-package net.tykkidream.jira.webhook.dingding;
+package org.tykkidream.jira.webhook.dingding;
 
 import com.dingtalk.api.DefaultDingTalkClient;
 import com.dingtalk.api.DingTalkClient;
