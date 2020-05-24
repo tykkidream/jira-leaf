@@ -9,8 +9,14 @@ public class Issue {
 
 	private String self;
 
+	/**
+	 * 问题的唯一标识
+	 */
 	private String key;
 
+	/**
+	 * 问题的详细字段
+	 */
 	private IssueFields fields;
 
 	public String getId() {

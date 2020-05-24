@@ -1,5 +1,7 @@
 package org.tykkidream.jira.webhook.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.tykkidream.jira.webhook.domain.model.changelog.ChangeLog;
 import org.tykkidream.jira.webhook.domain.model.comment.Comment;
 import org.tykkidream.jira.webhook.domain.model.issue.Issue;
@@ -19,6 +21,8 @@ public class WebHookMessage {
 	 */
 	private WebHookEvent webhookEvent;
 
+	@JsonProperty("issueEventType")
+	@JsonAlias("issue_event_type_name")
 	private IssueEventType issueEventType;
 
 	private User user;

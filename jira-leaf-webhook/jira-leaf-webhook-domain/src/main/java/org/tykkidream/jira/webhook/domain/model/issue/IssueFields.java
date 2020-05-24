@@ -5,7 +5,6 @@ import org.tykkidream.jira.webhook.domain.model.project.Project;
 import org.tykkidream.jira.webhook.domain.model.user.User;
 import org.tykkidream.jira.webhook.domain.model.watches.Watches;
 
-import javax.xml.crypto.Data;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +25,9 @@ public class IssueFields {
 	 */
 	private String description;
 
+	/**
+	 * 项目
+	 */
 	private Project project;
 
 	private List<String> fixVersions;
@@ -53,7 +55,7 @@ public class IssueFields {
 	 */
 	private String summary;
 
-	private Data lastViewed;
+	private Date lastViewed;
 
 	private Watches watches;
 
@@ -305,11 +307,11 @@ public class IssueFields {
 		}
 	}
 
-	public Data getLastViewed() {
+	public Date getLastViewed() {
 		return lastViewed;
 	}
 
-	public void setLastViewed(Data lastViewed) {
+	public void setLastViewed(Date lastViewed) {
 		if (lastViewed != null) {
 			this.lastViewed = lastViewed;
 		}

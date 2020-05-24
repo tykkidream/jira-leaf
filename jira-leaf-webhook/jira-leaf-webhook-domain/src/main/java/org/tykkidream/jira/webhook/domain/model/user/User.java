@@ -1,19 +1,36 @@
 package org.tykkidream.jira.webhook.domain.model.user;
 
+import org.tykkidream.jira.webhook.domain.model.AvatarUrls;
+
 /**
  * 用户
  */
 public class User {
 	private String self;
 
+	/**
+	 * 用户名
+	 */
 	private String name;
 
+	/**
+	 * 用户唯一标识
+	 */
 	private String key;
 
+	/**
+	 * 邮件
+	 */
 	private String emailAddress;
 
+	/**
+	 * 头像地址
+	 */
 	private AvatarUrls avatarUrls;
 
+	/**
+	 * 显示名
+	 */
 	private String displayName;
 
 	private Boolean active;
