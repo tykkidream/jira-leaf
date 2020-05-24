@@ -16,7 +16,7 @@
     <logger name="java.sql.PreparedStatement" level="info"/>
     <logger name="org.dbunit" level="info"/>
 
-    <root level="info">
+    <root level="debug">
         <appender-ref ref="console"/>
     </root>
 </configuration>

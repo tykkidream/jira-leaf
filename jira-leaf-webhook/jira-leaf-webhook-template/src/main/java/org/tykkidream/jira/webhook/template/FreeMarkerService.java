@@ -1,18 +1,14 @@
-package org.tykkidream.jira.webhook.configuration.freemarker;
-
-import org.springframework.stereotype.Component;
-import org.tykkidream.jira.webhook.domain.model.WebHookMessage;
+package org.tykkidream.jira.webhook.template;
 
 import javax.annotation.Resource;
 
-@Component
 public class FreeMarkerService {
 
 	@Resource
 	private FreeMarkerApplicationContext freeMarkerApplicationContext;
 
-	public String comment(WebHookMessage webHookMessage) {
-		String content = freeMarkerApplicationContext.processTemplate("dingding/comment.ftl", webHookMessage);
+	public String comment(String templateName , Object data) {
+		String content = freeMarkerApplicationContext.processTemplate(templateName, data);
 		return content;
 	}
 

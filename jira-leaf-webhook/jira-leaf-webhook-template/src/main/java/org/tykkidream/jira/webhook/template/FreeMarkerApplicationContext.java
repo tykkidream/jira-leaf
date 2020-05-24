@@ -1,4 +1,4 @@
-package org.tykkidream.jira.webhook.configuration.freemarker;
+package org.tykkidream.jira.webhook.template;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;

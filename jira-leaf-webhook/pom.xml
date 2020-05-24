@@ -12,7 +12,8 @@
 		<module>jira-leaf-webhook-dingding</module>
         <module>jira-leaf-webhook-application</module>
 		<module>jira-leaf-webhook-domain</module>
-	</modules>
+        <module>jira-leaf-webhook-template</module>
+    </modules>
 
 	<dependencyManagement>
 		<dependencies>

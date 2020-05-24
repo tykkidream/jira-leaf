@@ -2,6 +2,8 @@ package org.tykkidream.jira.webhook.configuration.freemarker;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.tykkidream.jira.webhook.template.FreeMarkerApplicationContext;
+import org.tykkidream.jira.webhook.template.FreeMarkerService;
 
 @Configuration
 public class FreemarkerConfiguration {
@@ -13,6 +15,13 @@ public class FreemarkerConfiguration {
 		context.loadDirectory("template");
 
 		return context;
+	}
+
+	@Bean
+	public FreeMarkerService freeMarkerService() {
+		FreeMarkerService freeMarkerService = new FreeMarkerService();
+
+		return freeMarkerService;
 	}
 
 }

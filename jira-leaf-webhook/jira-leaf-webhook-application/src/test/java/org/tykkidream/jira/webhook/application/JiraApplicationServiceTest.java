@@ -2,15 +2,21 @@ package org.tykkidream.jira.webhook.application;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.tykkidream.jira.webhook.configuration.freemarker.FreeMarkerApplicationContext;
-import org.tykkidream.jira.webhook.configuration.freemarker.FreeMarkerService;
 import org.tykkidream.jira.webhook.configuration.jackson.JacksonConfiguration;
+import org.tykkidream.jira.webhook.dingding.DingDingForwardMessageService;
+import org.tykkidream.jira.webhook.dingding.DingDingService;
+import org.tykkidream.jira.webhook.template.FreeMarkerApplicationContext;
+import org.tykkidream.jira.webhook.template.FreeMarkerService;
 
 public class JiraApplicationServiceTest {
 
 	public FreeMarkerApplicationContext freeMarkerApplicationContext;
 
 	public FreeMarkerService freeMarkerService;
+
+	public DingDingService dingDingService;
+
+	public DingDingForwardMessageService dingDingForwardMessageService;
 
 	public JiraApplicationService jiraApplicationService;
 
@@ -22,8 +28,14 @@ public class JiraApplicationServiceTest {
 		freeMarkerService = new FreeMarkerService();
 		freeMarkerService.setFreeMarkerApplicationContext(freeMarkerApplicationContext);
 
+		dingDingService = new DingDingService();
+
+		dingDingForwardMessageService = new DingDingForwardMessageService();
+		dingDingForwardMessageService.setDingDingService(dingDingService);
+		dingDingForwardMessageService.setFreeMarkerService(freeMarkerService);
+
 		jiraApplicationService = new JiraApplicationService();
-		jiraApplicationService.setFreeMarkerService(freeMarkerService);
+		jiraApplicationService.setForwardMessageService(dingDingForwardMessageService);
 
 		JacksonConfiguration.registerModule();
 	}

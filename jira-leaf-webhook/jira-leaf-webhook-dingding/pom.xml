@@ -16,6 +16,17 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.tykkidream</groupId>
+            <artifactId>jira-leaf-webhook-domain</artifactId>
+            <version>${parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tykkidream</groupId>
+            <artifactId>jira-leaf-webhook-template</artifactId>
+            <version>${parent.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.dingtalk.open</groupId>
             <artifactId>taobao-sdk-java-auto</artifactId>
             <systemPath>${project.basedir}/../../lib/taobao-sdk-java-auto_1479188381469-20200520.jar</systemPath>
