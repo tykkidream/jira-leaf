@@ -37,4 +37,74 @@ public class WebHookMessage {
 	 * 改动记录
 	 */
 	private ChangeLog changeLog;
+
+	public Date getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(Date timestamp) {
+		if (timestamp != null) {
+			this.timestamp = timestamp;
+		}
+	}
+
+	public WebHookEvent getWebhookEvent() {
+		return webhookEvent;
+	}
+
+	public void setWebhookEvent(WebHookEvent webhookEvent) {
+		if (webhookEvent != null) {
+			this.webhookEvent = webhookEvent;
+		}
+	}
+
+	public IssueEventType getIssueEventType() {
+		return issueEventType;
+	}
+
+	public void setIssueEventType(IssueEventType issueEventType) {
+		if (issueEventType != null) {
+			this.issueEventType = issueEventType;
+		}
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		if (user != null) {
+			this.user = user;
+		}
+	}
+
+	public Issue getIssue() {
+		return issue;
+	}
+
+	public void setIssue(Issue issue) {
+		if (issue != null) {
+			this.issue = issue;
+		}
+	}
+
+	public Comment getComment() {
+		return comment;
+	}
+
+	public void setComment(Comment comment) {
+		if (comment != null) {
+			this.comment = comment;
+		}
+	}
+
+	public ChangeLog getChangeLog() {
+		return changeLog;
+	}
+
+	public void setChangeLog(ChangeLog changeLog) {
+		if (changeLog != null) {
+			this.changeLog = changeLog;
+		}
+	}
 }

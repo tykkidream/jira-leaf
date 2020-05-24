@@ -1,7 +1,5 @@
 package org.tykkidream.jira.webhook.domain.model.user;
 
-import org.tykkidream.jira.webhook.domain.model.NullValue;
-
 /**
  * 用户
  */
@@ -21,17 +19,6 @@ public class User {
 	private Boolean active;
 
 	private String timeZone;
-
-	public User() {
-		setSelf(NullValue.EMPTY_STRING);
-		setName(NullValue.EMPTY_STRING);
-		setKey(NullValue.EMPTY_STRING);
-		setEmailAddress(NullValue.EMPTY_STRING);
-		setAvatarUrls(new AvatarUrls());
-		setDisplayName(NullValue.EMPTY_STRING);
-		setActive(false);
-		setTimeZone(NullValue.EMPTY_STRING);
-	}
 
 	public String getSelf() {
 		return self;

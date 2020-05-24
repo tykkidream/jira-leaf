@@ -1,7 +1,5 @@
 package org.tykkidream.jira.webhook.domain.model.user;
 
-import org.tykkidream.jira.webhook.domain.model.NullValue;
-
 /**
  * 头像地址
  */
@@ -10,13 +8,6 @@ public class AvatarUrls {
 	private String _32x32;
 	private String _24x24;
 	private String _16x16;
-
-	public AvatarUrls() {
-		set_16x16(NullValue.EMPTY_STRING);
-		set_24x24(NullValue.EMPTY_STRING);
-		set_16x16(NullValue.EMPTY_STRING);
-		set_32x32(NullValue.EMPTY_STRING);
-	}
 
 	public String get_48x48() {
 		return _48x48;

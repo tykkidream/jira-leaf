@@ -25,4 +25,43 @@ public class IssueComment {
 	 */
 	private Integer startAt;
 
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		if (comments != null) {
+			this.comments = comments;
+		}
+	}
+
+	public Integer getMaxResults() {
+		return maxResults;
+	}
+
+	public void setMaxResults(Integer maxResults) {
+		if (maxResults != null) {
+			this.maxResults = maxResults;
+		}
+	}
+
+	public Integer getTotal() {
+		return total;
+	}
+
+	public void setTotal(Integer total) {
+		if (total != null) {
+			this.total = total;
+		}
+	}
+
+	public Integer getStartAt() {
+		return startAt;
+	}
+
+	public void setStartAt(Integer startAt) {
+		if (startAt != null) {
+			this.startAt = startAt;
+		}
+	}
 }
