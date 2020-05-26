@@ -7,6 +7,8 @@ import org.tykkidream.jira.webhook.domain.model.WebHookMessage;
 import org.tykkidream.jira.webhook.template.FreeMarkerService;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DingDingForwardMessageService implements ForwardMessageService {
 	private static final Logger logger = LoggerFactory.getLogger(DingDingForwardMessageService.class);
@@ -22,13 +24,49 @@ public class DingDingForwardMessageService implements ForwardMessageService {
 	}
 
 	public void comment(WebHookMessage webHookMessage) {
-		String content = freeMarkerService.comment("dingding/comment.ftl", webHookMessage);
+
+
+		String summary = webHookMessage.getIssue().getFields().getSummary();
+
+		String buttonName = "查看详情";
+
+		String issueUrl;
+
+		String projectUrl;
+
+
+		{
+
+			String self = webHookMessage.getIssue().getSelf();
+			String key = webHookMessage.getIssue().getKey();
+
+			issueUrl = self.substring(0, self.indexOf("rest")) + "browse/" + key;
+		}
+
+
+		{
+			String self = webHookMessage.getIssue().getFields().getProject().getSelf();
+			String key = webHookMessage.getIssue().getFields().getProject().getKey();
+
+			projectUrl = self.substring(0, self.indexOf("rest")) + "projects/" + key + "/summary";
+		}
+
+
+
+
+		Map<String, Object> data = new HashMap<>(2);
+		data.put("webHookMessage", webHookMessage);
+		data.put("issueUrl", issueUrl);
+		data.put("projectUrl", projectUrl);
+
+		String content = freeMarkerService.comment("dingding/comment.ftl", data);
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("推送钉钉消息：{}", content);
 		}
 
-		dingDingService.sendMarkdown(content, null);
+		// dingDingService.sendMarkdown(summary, content, null);
+		dingDingService.sendActionCard(summary, content, null, buttonName, issueUrl);
 	}
 
 	public void setFreeMarkerService(FreeMarkerService freeMarkerService) {

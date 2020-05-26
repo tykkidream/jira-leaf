@@ -1,12 +1,26 @@
 package org.tykkidream.jira.webhook.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * 头像地址
  */
 public class AvatarUrls {
+	@JsonProperty("s48x48")
+	@JsonAlias("48x48")
 	private String s48x48;
+
+	@JsonProperty("s32x32")
+	@JsonAlias("32x32")
 	private String s32x32;
+
+	@JsonProperty("s24x24")
+	@JsonAlias("24x24")
 	private String s24x24;
+
+	@JsonProperty("s16x16")
+	@JsonAlias("16x16")
 	private String s16x16;
 
 	public String getS48x48() {

@@ -15,9 +15,9 @@ import java.util.List;
 public class DingDingService {
 	private static final Logger logger = LoggerFactory.getLogger(DingDingService.class);
 
-	private String accessToken = "60f92746603957320ac5a5020afc4f3acf55cb1ca89c1445c891009e1b814ce7";
+	private String accessToken = "f24f9947234d856e33b2a7af2e448a99261e8a52e524cf483aeda0485539496b";
 
-	private String secret = "SECf08199833c768cfa4f6af785ca5b7accae23efd683c83d2cc120fceb4c6c1ab0";
+	private String secret = "SEC9b2dfe8dac88e17ed1cc7dc11b6d495e9bbdc24ecf3750be7bfa1e91f802fa23";
 
 	private long timestamp = 0;
 
@@ -89,7 +89,7 @@ public class DingDingService {
 
 	}
 
-	public void sendMarkdown(String content, List<String> phones) {
+	public void sendMarkdown(String title, String content, List<String> phones) {
 		OapiRobotSendRequest request = new OapiRobotSendRequest();
 		request.setMsgtype("markdown");
 
@@ -104,6 +104,28 @@ public class DingDingService {
 			at.setAtMobiles(phones);
 			request.setAt(at);
 		}
+
+		execute(request);
+	}
+
+	public void sendActionCard(String title, String content, List<String> phones, String buttonName, String buttonUrl) {
+		OapiRobotSendRequest request = new OapiRobotSendRequest();
+		request.setMsgtype("actionCard");
+
+		OapiRobotSendRequest.Actioncard actionCard = new OapiRobotSendRequest.Actioncard();
+		actionCard.setTitle(title);
+		actionCard.setText(content);
+		actionCard.setSingleTitle(buttonName);
+		actionCard.setSingleURL(buttonUrl);
+		actionCard.setBtnOrientation("1");
+
+		if (phones != null && phones.size() > 0) {
+			OapiRobotSendRequest.At at = new OapiRobotSendRequest.At();
+			at.setAtMobiles(phones);
+			request.setAt(at);
+		}
+
+		request.setActionCard(actionCard);
 
 		execute(request);
 	}
