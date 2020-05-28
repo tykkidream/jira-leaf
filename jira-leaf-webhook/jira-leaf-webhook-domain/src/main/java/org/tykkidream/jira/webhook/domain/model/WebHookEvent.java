@@ -4,6 +4,12 @@ package org.tykkidream.jira.webhook.domain.model;
  * 事件
  */
 public enum WebHookEvent {
+	None {
+		@Override
+		public boolean isNone() {
+			return true;
+		}
+	},
 
 	/**
 	 * 新的备注事件
@@ -35,8 +41,13 @@ public enum WebHookEvent {
 				return JiraIssueUpdated;
 		}
 
-		return null;
+		return None;
 	}
+
+	public boolean isNone() {
+		return false;
+	}
+
 
 	public boolean isCommentCreated() {
 		return false;

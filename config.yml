@@ -1,0 +1,7 @@
+users :
+  - username: wlq
+    phone: 22222222222
+  - username: admin
+    phone: 11111111111
+  - username: user001
+    phone: 33333333333

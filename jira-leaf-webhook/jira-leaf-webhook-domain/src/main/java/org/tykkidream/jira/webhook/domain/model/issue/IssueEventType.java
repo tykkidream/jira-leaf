@@ -1,6 +1,12 @@
 package org.tykkidream.jira.webhook.domain.model.issue;
 
 public enum  IssueEventType {
+	None {
+		@Override
+		public boolean isNone() {
+			return true;
+		}
+	},
 
 	IssueUpdated {
 		@Override
@@ -35,7 +41,11 @@ public enum  IssueEventType {
 			return IssueAssigned;
 		}
 
-		return null;
+		return None;
+	}
+
+	public boolean isNone() {
+		return false;
 	}
 
 	public boolean isIssueUpdated() {

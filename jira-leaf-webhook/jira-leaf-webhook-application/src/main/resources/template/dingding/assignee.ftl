@@ -7,6 +7,9 @@
 ${webHookMessage.issue.fields.description}
 
 ---
+
+<font color=#000000 size=5 face="微软雅黑">请 <font color=#800080 size=5 face="微软雅黑">${webHookMessage.issue.fields.assignee.displayName}</font>  及时跟进！</font>
+
 <font color=#000000 size=3 face="微软雅黑">类型： ${webHookMessage.issue.fields.issueType.name}</font>
 
 <#if webHookMessage.issue.fields.labels?? >

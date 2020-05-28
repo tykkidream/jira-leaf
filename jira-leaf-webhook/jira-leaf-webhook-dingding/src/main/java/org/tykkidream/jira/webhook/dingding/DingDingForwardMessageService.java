@@ -6,10 +6,14 @@ import org.tykkidream.jira.webhook.domain.forward.ForwardMessageService;
 import org.tykkidream.jira.webhook.domain.model.WebHookMessage;
 import org.tykkidream.jira.webhook.domain.model.changelog.ChangeLog;
 import org.tykkidream.jira.webhook.domain.model.changelog.ChangeLogItem;
+import org.tykkidream.jira.webhook.domain.model.config.user.UserProfile;
+import org.tykkidream.jira.webhook.domain.model.user.User;
+import org.tykkidream.jira.webhook.domain.repository.CoinfigUserProfileRepository;
 import org.tykkidream.jira.webhook.template.FreeMarkerService;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +25,9 @@ public class DingDingForwardMessageService implements ForwardMessageService {
 
 	@Resource
 	private DingDingService dingDingService;
+
+	@Resource
+	private CoinfigUserProfileRepository coinfigUserProfileRepository;
 
 	public void comment(WebHookMessage webHookMessage) {
 		String summary = webHookMessage.getIssue().getFields().getSummary();
@@ -100,15 +107,28 @@ public class DingDingForwardMessageService implements ForwardMessageService {
 				projectUrl = self.substring(0, self.indexOf("rest")) + "projects/" + key + "/summary";
 			}
 
+			User assignee = webHookMessage.getIssue().getFields().getAssignee();
+
+			UserProfile userProfile = coinfigUserProfileRepository.findUserProfileByUsername(assignee.getName());
+
+			List<String> phones = new LinkedList<>();
+
+			if (userProfile != null) {
+				String phone = userProfile.getPhone();
+
+				if (phone != null) {
+					phones.add(phone);
+				}
+			}
+
 			Map<String, Object> data = new HashMap<>(2);
 			data.put("webHookMessage", webHookMessage);
 			data.put("issueUrl", issueUrl);
 			data.put("projectUrl", projectUrl);
 
-
 			String content = freeMarkerService.comment("dingding/assignee.ftl", data);
 
-			dingDingService.sendActionCard(summary, content, null, buttonName, issueUrl);
+			dingDingService.sendActionCard(summary, content, phones, buttonName, issueUrl);
 		}
 
 	}

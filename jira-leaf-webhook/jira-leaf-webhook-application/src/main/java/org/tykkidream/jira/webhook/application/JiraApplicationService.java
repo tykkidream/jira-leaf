@@ -1,5 +1,6 @@
 package org.tykkidream.jira.webhook.application;
 
+import org.tykkidream.jira.webhook.configuration.MyConfiguration;
 import org.tykkidream.jira.webhook.domain.forward.ForwardMessageService;
 import org.tykkidream.jira.webhook.domain.model.WebHookEvent;
 import org.tykkidream.jira.webhook.domain.model.WebHookMessage;
@@ -13,6 +14,9 @@ public class JiraApplicationService {
 	@Resource
 	private ForwardMessageService forwardMessageService;
 
+	@Resource
+	private MyConfiguration myConfiguration;
+
 	public WebHookMessage buildWebHookMessageFromJSONString(String jsongString) {
 		WebHookMessage webHookMessage = JsonUtil.readValue(jsongString, WebHookMessage.class);
 		return webHookMessage;
@@ -23,11 +27,15 @@ public class JiraApplicationService {
 
 		WebHookEvent webhookEvent = webHookMessage.getWebhookEvent();
 
-		if (webhookEvent.isJiraIssueUpdated()) {
+		if (webhookEvent.isNone()) {
+			return;
+		} else if (webhookEvent.isJiraIssueUpdated()) {
 
 			IssueEventType issueEventType = webHookMessage.getIssueEventType();
 
-			if (issueEventType.isIssueCommented()) {
+			if (issueEventType.isNone()) {
+				return;
+			} else if (issueEventType.isIssueCommented()) {
 				forwardMessageService.comment(webHookMessage);
 			} else if (issueEventType.isIssueAssigned()) {
 				forwardMessageService.changeLog(webHookMessage);
