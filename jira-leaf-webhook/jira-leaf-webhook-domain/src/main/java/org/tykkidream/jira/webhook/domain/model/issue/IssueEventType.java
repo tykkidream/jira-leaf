@@ -16,6 +16,13 @@ public enum  IssueEventType {
 		}
 	},
 
+	IssueAssigned {
+		@Override
+		public boolean isIssueAssigned() {
+			return true;
+		}
+	},
+
 	;
 
 	public static IssueEventType valueOfJSON(String text) {
@@ -24,6 +31,8 @@ public enum  IssueEventType {
 			return IssueUpdated;
 		case "issue_commented":
 			return IssueCommented;
+		case "issue_assigned":
+			return IssueAssigned;
 		}
 
 		return null;
@@ -34,6 +43,10 @@ public enum  IssueEventType {
 	}
 
 	public boolean isIssueCommented() {
+		return false;
+	}
+
+	public boolean isIssueAssigned() {
 		return false;
 	}
 }

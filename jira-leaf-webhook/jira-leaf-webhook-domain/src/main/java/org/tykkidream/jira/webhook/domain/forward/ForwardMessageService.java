@@ -4,4 +4,6 @@ import org.tykkidream.jira.webhook.domain.model.WebHookMessage;
 
 public interface ForwardMessageService {
 	void comment(WebHookMessage webHookMessage);
+
+	void changeLog(WebHookMessage webHookMessage);
 }

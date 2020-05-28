@@ -1,5 +1,7 @@
 package org.tykkidream.jira.webhook.domain.model.issue;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.tykkidream.jira.webhook.domain.model.Priority;
 import org.tykkidream.jira.webhook.domain.model.project.Project;
 import org.tykkidream.jira.webhook.domain.model.user.User;
@@ -10,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 
 public class IssueFields {
+	@JsonProperty("issuetype")
+	@JsonAlias("issueType")
 	private IssueType issueType;
 
 	// todo

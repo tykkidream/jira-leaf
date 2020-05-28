@@ -40,6 +40,8 @@ public class WebHookMessage {
 	/**
 	 * 改动记录
 	 */
+	@JsonProperty("changelog")
+	@JsonAlias("changeLog")
 	private ChangeLog changeLog;
 
 	public Date getTimestamp() {

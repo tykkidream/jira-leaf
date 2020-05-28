@@ -29,6 +29,10 @@ public class JiraApplicationService {
 
 			if (issueEventType.isIssueCommented()) {
 				forwardMessageService.comment(webHookMessage);
+			} else if (issueEventType.isIssueAssigned()) {
+				forwardMessageService.changeLog(webHookMessage);
+			} else if (issueEventType.isIssueUpdated()) {
+				forwardMessageService.changeLog(webHookMessage);
 			}
 
 		}

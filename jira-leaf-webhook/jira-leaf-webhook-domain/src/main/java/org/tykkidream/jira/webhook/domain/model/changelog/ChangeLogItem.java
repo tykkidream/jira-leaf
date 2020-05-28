@@ -28,6 +28,13 @@ public class ChangeLogItem {
 	 */
 	private String toString;
 
+	public boolean isAssigneeChangeLog() {
+		return field.equals("assignee");
+	}
+
+
+	/* •••••••••••••••••••••••••••••••••••••••装••订••线••内••禁••止••作••答••否••则••记••零••分••••••••••••••••••••••••••••••••••••••• */
+
 	public String getField() {
 		return field;
 	}

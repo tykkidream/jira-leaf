@@ -12,9 +12,6 @@ public class WebHookEventDeserializer extends JsonDeserializer<WebHookEvent> {
 	@Override
 	public WebHookEvent deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
 		String text = jsonParser.getText();
-
-
-
 		return WebHookEvent.valueOfJSON(text);
 	}
 }
