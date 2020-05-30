@@ -2,8 +2,19 @@ package org.tykkidream.jira.webhook.domain.model.config.user;
 
 public class UserProfile {
 
+	/**
+	 * jira账号
+	 */
 	private String username;
 
+	/**
+	 * 姓名
+	 */
+	private String fullname;
+
+	/**
+	 * 手机号
+	 */
 	private String phone;
 
 	public String getUsername() {
@@ -13,6 +24,16 @@ public class UserProfile {
 	public void setUsername(String username) {
 		if (username != null) {
 			this.username = username;
+		}
+	}
+
+	public String getFullname() {
+		return fullname;
+	}
+
+	public void setFullname(String fullname) {
+		if (fullname != null) {
+			this.fullname = fullname;
 		}
 	}
 
