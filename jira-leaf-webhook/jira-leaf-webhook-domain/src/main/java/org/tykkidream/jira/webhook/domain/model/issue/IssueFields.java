@@ -109,7 +109,12 @@ public class IssueFields {
 
 	private List<String> versions;
 
-	private String duedate;
+	/**
+	 * 截止时间
+	 */
+	@JsonProperty("duedate")
+	@JsonAlias("dueDate")
+	private String dueDate;
 
 	private IssueProgress progress;
 
@@ -474,13 +479,13 @@ public class IssueFields {
 		}
 	}
 
-	public String getDuedate() {
-		return duedate;
+	public String getDueDate() {
+		return dueDate;
 	}
 
-	public void setDuedate(String duedate) {
-		if (duedate != null) {
-			this.duedate = duedate;
+	public void setDueDate(String dueDate) {
+		if (dueDate != null) {
+			this.dueDate = dueDate;
 		}
 	}
 
