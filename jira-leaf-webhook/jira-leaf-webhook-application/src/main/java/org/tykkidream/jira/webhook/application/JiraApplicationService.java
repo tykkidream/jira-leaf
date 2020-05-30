@@ -28,19 +28,28 @@ public class JiraApplicationService {
 		WebHookEvent webhookEvent = webHookMessage.getWebhookEvent();
 
 		if (webhookEvent.isNone()) {
+			// 未知的事件
 			return;
 		} else if (webhookEvent.isJiraIssueUpdated()) {
+			// 问题相关事件
 
 			IssueEventType issueEventType = webHookMessage.getIssueEventType();
 
 			if (issueEventType.isNone()) {
+				// 未知的问题事件
 				return;
 			} else if (issueEventType.isIssueCommented()) {
+				// 添加备注
 				forwardMessageService.comment(webHookMessage);
 			} else if (issueEventType.isIssueAssigned()) {
+				// 分配经办人
 				forwardMessageService.changeLog(webHookMessage);
 			} else if (issueEventType.isIssueUpdated()) {
+				//
 				forwardMessageService.changeLog(webHookMessage);
+			} else if (issueEventType.isIssueResolved()) {
+				// 问题被解决
+				forwardMessageService.resolved(webHookMessage);
 			}
 
 		}

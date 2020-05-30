@@ -39,7 +39,7 @@ public class IssueFields {
 
 	private String aggregatetimespent;
 
-	private String resolution;
+	private IssueResolution resolution;
 
 	private Map timetracking;
 
@@ -51,7 +51,9 @@ public class IssueFields {
 
 	private String aggregatetimeestimate;
 
-	private String resolutiondate;
+	@JsonProperty("resolutiondate")
+	@JsonAlias("resolutionDate")
+	private Date resolutionDate;
 
 	private Integer workratio;
 
@@ -222,11 +224,11 @@ public class IssueFields {
 		}
 	}
 
-	public String getResolution() {
+	public IssueResolution getResolution() {
 		return resolution;
 	}
 
-	public void setResolution(String resolution) {
+	public void setResolution(IssueResolution resolution) {
 		if (resolution != null) {
 			this.resolution = resolution;
 		}
@@ -282,13 +284,13 @@ public class IssueFields {
 		}
 	}
 
-	public String getResolutiondate() {
-		return resolutiondate;
+	public Date getResolutionDate() {
+		return resolutionDate;
 	}
 
-	public void setResolutiondate(String resolutiondate) {
-		if (resolutiondate != null) {
-			this.resolutiondate = resolutiondate;
+	public void setResolutionDate(Date resolutionDate) {
+		if (resolutionDate != null) {
+			this.resolutionDate = resolutionDate;
 		}
 	}
 

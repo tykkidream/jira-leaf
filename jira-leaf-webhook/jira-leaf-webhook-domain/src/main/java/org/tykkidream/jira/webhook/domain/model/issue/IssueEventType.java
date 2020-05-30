@@ -1,6 +1,9 @@
 package org.tykkidream.jira.webhook.domain.model.issue;
 
 public enum  IssueEventType {
+	/**
+	 * 此枚举未定义的其它事件类型
+	 */
 	None {
 		@Override
 		public boolean isNone() {
@@ -8,6 +11,9 @@ public enum  IssueEventType {
 		}
 	},
 
+	/**
+	 * 问题的信息（字段）被更新
+	 */
 	IssueUpdated {
 		@Override
 		public boolean isIssueUpdated() {
@@ -15,6 +21,9 @@ public enum  IssueEventType {
 		}
 	},
 
+	/**
+	 * 添加新的备注给问题
+	 */
 	IssueCommented {
 		@Override
 		public boolean isIssueCommented() {
@@ -22,9 +31,22 @@ public enum  IssueEventType {
 		}
 	},
 
+	/**
+	 * 问题被分配经办人
+	 */
 	IssueAssigned {
 		@Override
 		public boolean isIssueAssigned() {
+			return true;
+		}
+	},
+
+	/**
+	 * 问题解决完成
+	 */
+	IssueResolved {
+		@Override
+		public boolean isIssueResolved() {
 			return true;
 		}
 	},
@@ -39,6 +61,8 @@ public enum  IssueEventType {
 			return IssueCommented;
 		case "issue_assigned":
 			return IssueAssigned;
+		case "issue_resolved":
+			return IssueResolved;
 		}
 
 		return None;
@@ -57,6 +81,10 @@ public enum  IssueEventType {
 	}
 
 	public boolean isIssueAssigned() {
+		return false;
+	}
+
+	public boolean isIssueResolved() {
 		return false;
 	}
 }

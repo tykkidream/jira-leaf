@@ -28,8 +28,28 @@ public class ChangeLogItem {
 	 */
 	private String toString;
 
+	/**
+	 * assignee 经办人字段被修改
+	 * @return
+	 */
 	public boolean isAssigneeChangeLog() {
 		return field.equals("assignee");
+	}
+
+	/**
+	 * status 状态字段被修改
+	 * @return
+	 */
+	public boolean isStatusChangeLog() {
+		return field.equals("status");
+	}
+
+	/**
+	 * resolution 解决信息字段被修改
+	 * @return
+	 */
+	public boolean isResolutionChangeLog() {
+		return field.equals("resolution");
 	}
 
 
