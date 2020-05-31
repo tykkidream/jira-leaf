@@ -61,6 +61,16 @@ public enum  IssueEventType {
 		}
 	},
 
+	/**
+	 * 问题重新打开
+	 */
+	IssueReopened {
+		@Override
+		public boolean isIssueReopened() {
+			return true;
+		}
+	},
+
 	;
 
 	public static IssueEventType valueOfJSON(String text) {
@@ -75,6 +85,8 @@ public enum  IssueEventType {
 			return IssueResolved;
 		case "issue_closed":
 			return IssueClosed;
+		case "issue_reopened":
+			return IssueReopened;
 		}
 
 		return None;
@@ -101,6 +113,10 @@ public enum  IssueEventType {
 	}
 
 	public boolean isIssueClosed() {
+		return false;
+	}
+
+	public boolean isIssueReopened() {
 		return false;
 	}
 }

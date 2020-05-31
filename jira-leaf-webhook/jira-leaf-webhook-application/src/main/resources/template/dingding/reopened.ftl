@@ -1,21 +1,20 @@
-<font color=#000000 size=5 face="微软雅黑">有一个新任务需要处理</font>
+<font color=#000000 size=5 face="微软雅黑">任务重新打开</font>
 
 ---
 
 <font color=#000000 size=5 face="微软雅黑">${webHookMessage.issue.key} ： **[${webHookMessage.issue.fields.summary}](${issueUrl!})**</font>
 
-<font color=#FF1493 size=5 face="微软雅黑">起床干活了！ 请 <font color=#800080 size=5 face="微软雅黑">${webHookMessage.issue.fields.assignee.displayName}</font>  及时跟进处理！</font>
+<font color=#FF1493 size=5 face="微软雅黑">${webHookMessage.issue.fields.status.name}！ 请 <font color=#800080 size=5 face="微软雅黑">${webHookMessage.issue.fields.assignee.displayName}</font>  及时跟进处理！</font>
 
-<#if (webHookMessage.issue.fields.description)?? >
+<#if (webHookMessage.comment.body)?? >
 ---
 
-${webHookMessage.issue.fields.description}
+${webHookMessage.comment.body}
 </#if>
 
 ---
-<#if (webHookMessage.issue.fields.dueDate)?? >
-<font color=#000000 size=3 face="微软雅黑">期限： ${webHookMessage.issue.fields.dueDate}</font>
-</#if>
+
+<font color=#000000 size=3 face="微软雅黑">时间： ${webHookMessage.issue.fields.updated?string('yyyy-MM-dd HH:mm:ss')}</font>
 
 <font color=#000000 size=3 face="微软雅黑">类型： ${webHookMessage.issue.fields.issueType.name}</font>
 
