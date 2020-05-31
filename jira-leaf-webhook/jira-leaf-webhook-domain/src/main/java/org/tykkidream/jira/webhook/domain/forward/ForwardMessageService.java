@@ -20,4 +20,10 @@ public interface ForwardMessageService {
 	 * @param webHookMessage
 	 */
 	void resolved(WebHookMessage webHookMessage);
+
+	/**
+	 * 问题关闭通知
+	 * @param webHookMessage
+	 */
+	void closed(WebHookMessage webHookMessage);
 }

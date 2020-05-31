@@ -50,6 +50,9 @@ public class JiraApplicationService {
 			} else if (issueEventType.isIssueResolved()) {
 				// 问题被解决
 				forwardMessageService.resolved(webHookMessage);
+			} else if (issueEventType.isIssueClosed()) {
+				// 问题被关闭
+				forwardMessageService.closed(webHookMessage);
 			}
 
 		}

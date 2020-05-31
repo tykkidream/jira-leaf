@@ -43,7 +43,7 @@ public class IssueFields {
 
 	private Map timetracking;
 
-	private String customfield_10105;
+	private List<String> customfield_10105;
 
 	private String customfield_10106;
 
@@ -249,11 +249,11 @@ public class IssueFields {
 		}
 	}
 
-	public String getCustomfield_10105() {
+	public List<String> getCustomfield_10105() {
 		return customfield_10105;
 	}
 
-	public void setCustomfield_10105(String customfield_10105) {
+	public void setCustomfield_10105(List<String> customfield_10105) {
 		if (customfield_10105 != null) {
 			this.customfield_10105 = customfield_10105;
 		}
