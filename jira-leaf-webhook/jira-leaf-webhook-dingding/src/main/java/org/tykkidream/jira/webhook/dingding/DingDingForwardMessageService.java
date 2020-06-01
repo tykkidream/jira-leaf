@@ -281,6 +281,69 @@ public class DingDingForwardMessageService implements ForwardMessageService {
 		dingDingService.sendActionCard(summary, content, phones, buttonName, issueUrl);
 	}
 
+	@Override
+	public void generic(WebHookMessage webHookMessage) {
+		ChangeLog changeLog = webHookMessage.getChangeLog();
+
+		List<ChangeLogItem> changeLogItems = changeLog.getItems();
+
+		for (ChangeLogItem changeLogItem : changeLogItems) {
+
+			if (changeLogItem.isStatusChangeLog()) {
+				if (changeLogItem.getToString().equals("Done")
+				&& !changeLogItem.getFromString().equals("Done")) {
+					String summary = webHookMessage.getIssue().getFields().getSummary();
+
+					String buttonName = "查看详情";
+
+					String issueUrl;
+
+					String projectUrl;
+
+
+					{
+
+						String self = webHookMessage.getIssue().getSelf();
+						String key = webHookMessage.getIssue().getKey();
+
+						issueUrl = self.substring(0, self.indexOf("rest")) + "browse/" + key;
+					}
+
+
+					{
+						String self = webHookMessage.getIssue().getFields().getProject().getSelf();
+						String key = webHookMessage.getIssue().getFields().getProject().getKey();
+
+						projectUrl = self.substring(0, self.indexOf("rest")) + "projects/" + key + "/summary";
+					}
+
+					User assignee = webHookMessage.getIssue().getFields().getAssignee();
+
+					UserProfile userProfile = coinfigUserProfileRepository.findUserProfileByUsername(assignee.getName());
+
+					List<String> phones = new LinkedList<>();
+
+					if (userProfile != null) {
+						String phone = userProfile.getPhone();
+
+						if (phone != null) {
+							phones.add(phone);
+						}
+					}
+
+					Map<String, Object> data = new HashMap<>(2);
+					data.put("webHookMessage", webHookMessage);
+					data.put("issueUrl", issueUrl);
+					data.put("projectUrl", projectUrl);
+
+					String content = freeMarkerService.comment("dingding/done.ftl", data);
+
+					dingDingService.sendActionCard(summary, content, phones, buttonName, issueUrl);
+				}
+			}
+		}
+	}
+
 	/* •••••••••••••••••••••••••••••••••••••••装••订••线••内••禁••止••作••答••否••则••记••零••分••••••••••••••••••••••••••••••••••••••• */
 
 	public void setFreeMarkerService(FreeMarkerService freeMarkerService) {

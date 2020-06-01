@@ -56,6 +56,9 @@ public class JiraApplicationService {
 			} else if (issueEventType.isIssueReopened()) {
 				// 问题被重打开
 				forwardMessageService.reopened(webHookMessage);
+			} else if (issueEventType.isIssueGeneric()) {
+				// 问题被重打开
+				forwardMessageService.generic(webHookMessage);
 			}
 
 		}

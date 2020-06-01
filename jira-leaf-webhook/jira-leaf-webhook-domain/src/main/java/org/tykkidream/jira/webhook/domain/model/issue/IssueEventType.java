@@ -71,6 +71,15 @@ public enum  IssueEventType {
 		}
 	},
 
+	IssueGeneric {
+		@Override
+		public boolean isIssueGeneric() {
+			return true;
+		}
+	},
+
+
+
 	;
 
 	public static IssueEventType valueOfJSON(String text) {
@@ -87,6 +96,8 @@ public enum  IssueEventType {
 			return IssueClosed;
 		case "issue_reopened":
 			return IssueReopened;
+		case "issue_generic":
+			return IssueGeneric;
 		}
 
 		return None;
@@ -117,6 +128,10 @@ public enum  IssueEventType {
 	}
 
 	public boolean isIssueReopened() {
+		return false;
+	}
+
+	public boolean isIssueGeneric() {
 		return false;
 	}
 }

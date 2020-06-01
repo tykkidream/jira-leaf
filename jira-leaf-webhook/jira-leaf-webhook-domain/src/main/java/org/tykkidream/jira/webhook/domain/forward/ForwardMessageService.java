@@ -32,4 +32,6 @@ public interface ForwardMessageService {
 	 * @param webHookMessage
 	 */
 	void reopened(WebHookMessage webHookMessage);
+
+	void generic(WebHookMessage webHookMessage);
 }
