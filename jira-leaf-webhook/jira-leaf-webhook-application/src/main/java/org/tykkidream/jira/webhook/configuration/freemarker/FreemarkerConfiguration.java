@@ -12,7 +12,7 @@ public class FreemarkerConfiguration {
 	public FreeMarkerApplicationContext FreeMarkerApplicationContext() {
 		FreeMarkerApplicationContext context = new FreeMarkerApplicationContext();
 
-		context.loadClasspath("template");
+		context.loadClasspath("/META-INF/freemarker");
 
 		return context;
 	}
