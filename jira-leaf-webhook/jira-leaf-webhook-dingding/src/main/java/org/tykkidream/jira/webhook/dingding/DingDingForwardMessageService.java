@@ -29,33 +29,15 @@ public class DingDingForwardMessageService implements ForwardMessageService {
 	@Resource
 	private CoinfigUserProfileRepository coinfigUserProfileRepository;
 
+
+	private static final String ButtonName = "查看详情";
+
 	public void comment(WebHookMessage webHookMessage) {
 		String summary = webHookMessage.getIssue().getFields().getSummary();
 
-		String buttonName = "查看详情";
+		String issueUrl = buildIssueUrl(webHookMessage);
 
-		String issueUrl;
-
-		String projectUrl;
-
-
-		{
-
-			String self = webHookMessage.getIssue().getSelf();
-			String key = webHookMessage.getIssue().getKey();
-
-			issueUrl = self.substring(0, self.indexOf("rest")) + "browse/" + key;
-		}
-
-
-		{
-			String self = webHookMessage.getIssue().getFields().getProject().getSelf();
-			String key = webHookMessage.getIssue().getFields().getProject().getKey();
-
-			projectUrl = self.substring(0, self.indexOf("rest")) + "projects/" + key + "/summary";
-		}
-
-
+		String projectUrl = buildProjectUrl(webHookMessage);
 
 
 		Map<String, Object> data = new HashMap<>(2);
@@ -70,7 +52,7 @@ public class DingDingForwardMessageService implements ForwardMessageService {
 		}
 
 		// dingDingService.sendMarkdown(summary, content, null);
-		dingDingService.sendActionCard(summary, content, null, buttonName, issueUrl);
+		dingDingService.sendActionCard(summary, content, null, ButtonName, issueUrl);
 	}
 
 	@Override
@@ -84,28 +66,9 @@ public class DingDingForwardMessageService implements ForwardMessageService {
 		if (changeLogItem.isAssigneeChangeLog()) {
 			String summary = webHookMessage.getIssue().getFields().getSummary();
 
-			String buttonName = "查看详情";
+			String issueUrl = buildIssueUrl(webHookMessage);
 
-			String issueUrl;
-
-			String projectUrl;
-
-
-			{
-
-				String self = webHookMessage.getIssue().getSelf();
-				String key = webHookMessage.getIssue().getKey();
-
-				issueUrl = self.substring(0, self.indexOf("rest")) + "browse/" + key;
-			}
-
-
-			{
-				String self = webHookMessage.getIssue().getFields().getProject().getSelf();
-				String key = webHookMessage.getIssue().getFields().getProject().getKey();
-
-				projectUrl = self.substring(0, self.indexOf("rest")) + "projects/" + key + "/summary";
-			}
+			String projectUrl = buildProjectUrl(webHookMessage);
 
 			User assignee = webHookMessage.getIssue().getFields().getAssignee();
 
@@ -128,7 +91,7 @@ public class DingDingForwardMessageService implements ForwardMessageService {
 
 			String content = freeMarkerService.comment("dingding/assignee.ftl", data);
 
-			dingDingService.sendActionCard(summary, content, phones, buttonName, issueUrl);
+			dingDingService.sendActionCard(summary, content, phones, ButtonName, issueUrl);
 		}
 
 	}
@@ -137,26 +100,9 @@ public class DingDingForwardMessageService implements ForwardMessageService {
 	public void resolved(WebHookMessage webHookMessage) {
 		String summary = webHookMessage.getIssue().getFields().getSummary();
 
-		String buttonName = "查看详情";
+		String issueUrl = buildIssueUrl(webHookMessage);
 
-		String issueUrl;
-
-		String projectUrl;
-
-		{
-
-			String self = webHookMessage.getIssue().getSelf();
-			String key = webHookMessage.getIssue().getKey();
-
-			issueUrl = self.substring(0, self.indexOf("rest")) + "browse/" + key;
-		}
-
-		{
-			String self = webHookMessage.getIssue().getFields().getProject().getSelf();
-			String key = webHookMessage.getIssue().getFields().getProject().getKey();
-
-			projectUrl = self.substring(0, self.indexOf("rest")) + "projects/" + key + "/summary";
-		}
+		String projectUrl = buildProjectUrl(webHookMessage);
 
 		User assignee = webHookMessage.getIssue().getFields().getAssignee();
 
@@ -179,33 +125,16 @@ public class DingDingForwardMessageService implements ForwardMessageService {
 
 		String content = freeMarkerService.comment("dingding/resolved.ftl", data);
 
-		dingDingService.sendActionCard(summary, content, phones, buttonName, issueUrl);
+		dingDingService.sendActionCard(summary, content, phones, ButtonName, issueUrl);
 	}
 
 	@Override
 	public void closed(WebHookMessage webHookMessage) {
 		String summary = webHookMessage.getIssue().getFields().getSummary();
 
-		String buttonName = "查看详情";
+		String issueUrl = buildIssueUrl(webHookMessage);
 
-		String issueUrl;
-
-		String projectUrl;
-
-		{
-
-			String self = webHookMessage.getIssue().getSelf();
-			String key = webHookMessage.getIssue().getKey();
-
-			issueUrl = self.substring(0, self.indexOf("rest")) + "browse/" + key;
-		}
-
-		{
-			String self = webHookMessage.getIssue().getFields().getProject().getSelf();
-			String key = webHookMessage.getIssue().getFields().getProject().getKey();
-
-			projectUrl = self.substring(0, self.indexOf("rest")) + "projects/" + key + "/summary";
-		}
+		String projectUrl = buildProjectUrl(webHookMessage);
 
 		User assignee = webHookMessage.getIssue().getFields().getAssignee();
 
@@ -228,7 +157,7 @@ public class DingDingForwardMessageService implements ForwardMessageService {
 
 		String content = freeMarkerService.comment("dingding/closed.ftl", data);
 
-		dingDingService.sendActionCard(summary, content, phones, buttonName, issueUrl);
+		dingDingService.sendActionCard(summary, content, phones, ButtonName, issueUrl);
 
 	}
 
@@ -236,26 +165,9 @@ public class DingDingForwardMessageService implements ForwardMessageService {
 	public void reopened(WebHookMessage webHookMessage) {
 		String summary = webHookMessage.getIssue().getFields().getSummary();
 
-		String buttonName = "查看详情";
+		String issueUrl = buildIssueUrl(webHookMessage);
 
-		String issueUrl;
-
-		String projectUrl;
-
-		{
-
-			String self = webHookMessage.getIssue().getSelf();
-			String key = webHookMessage.getIssue().getKey();
-
-			issueUrl = self.substring(0, self.indexOf("rest")) + "browse/" + key;
-		}
-
-		{
-			String self = webHookMessage.getIssue().getFields().getProject().getSelf();
-			String key = webHookMessage.getIssue().getFields().getProject().getKey();
-
-			projectUrl = self.substring(0, self.indexOf("rest")) + "projects/" + key + "/summary";
-		}
+		String projectUrl = buildProjectUrl(webHookMessage);
 
 		User assignee = webHookMessage.getIssue().getFields().getAssignee();
 
@@ -271,14 +183,14 @@ public class DingDingForwardMessageService implements ForwardMessageService {
 			}
 		}
 
-		Map<String, Object> data = new HashMap<>(2);
+		Map<String, Object> data = new HashMap<>(3);
 		data.put("webHookMessage", webHookMessage);
 		data.put("issueUrl", issueUrl);
 		data.put("projectUrl", projectUrl);
 
 		String content = freeMarkerService.comment("dingding/reopened.ftl", data);
 
-		dingDingService.sendActionCard(summary, content, phones, buttonName, issueUrl);
+		dingDingService.sendActionCard(summary, content, phones, ButtonName, issueUrl);
 	}
 
 	@Override
@@ -294,28 +206,9 @@ public class DingDingForwardMessageService implements ForwardMessageService {
 				&& !changeLogItem.getFromString().equals("Done")) {
 					String summary = webHookMessage.getIssue().getFields().getSummary();
 
-					String buttonName = "查看详情";
+					String issueUrl = buildIssueUrl(webHookMessage);
 
-					String issueUrl;
-
-					String projectUrl;
-
-
-					{
-
-						String self = webHookMessage.getIssue().getSelf();
-						String key = webHookMessage.getIssue().getKey();
-
-						issueUrl = self.substring(0, self.indexOf("rest")) + "browse/" + key;
-					}
-
-
-					{
-						String self = webHookMessage.getIssue().getFields().getProject().getSelf();
-						String key = webHookMessage.getIssue().getFields().getProject().getKey();
-
-						projectUrl = self.substring(0, self.indexOf("rest")) + "projects/" + key + "/summary";
-					}
+					String projectUrl = buildProjectUrl(webHookMessage);
 
 					User assignee = webHookMessage.getIssue().getFields().getAssignee();
 
@@ -331,17 +224,35 @@ public class DingDingForwardMessageService implements ForwardMessageService {
 						}
 					}
 
-					Map<String, Object> data = new HashMap<>(2);
+					Map<String, Object> data = new HashMap<>(3);
 					data.put("webHookMessage", webHookMessage);
 					data.put("issueUrl", issueUrl);
 					data.put("projectUrl", projectUrl);
 
 					String content = freeMarkerService.comment("dingding/done.ftl", data);
 
-					dingDingService.sendActionCard(summary, content, phones, buttonName, issueUrl);
+					dingDingService.sendActionCard(summary, content, phones, ButtonName, issueUrl);
 				}
 			}
 		}
+	}
+
+	private String buildIssueUrl(WebHookMessage webHookMessage) {
+		String issueUrl;
+		String self = webHookMessage.getIssue().getSelf();
+		String key = webHookMessage.getIssue().getKey();
+
+		issueUrl = self.substring(0, self.indexOf("rest")) + "browse/" + key;
+		return issueUrl;
+	}
+
+	private String buildProjectUrl(WebHookMessage webHookMessage) {
+		String projectUrl;
+		String self = webHookMessage.getIssue().getFields().getProject().getSelf();
+		String key = webHookMessage.getIssue().getFields().getProject().getKey();
+
+		projectUrl = self.substring(0, self.indexOf("rest")) + "projects/" + key + "/summary";
+		return projectUrl;
 	}
 
 	/* •••••••••••••••••••••••••••••••••••••••装••订••线••内••禁••止••作••答••否••则••记••零••分••••••••••••••••••••••••••••••••••••••• */
