@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	
+	<!-- 应用名 -->
+    <property name="app_name" value="jira-leaf-webhook-service"/>
+	<!-- 定义日志文件 输入位置 -->
+    <property name="log_dir" value="/app/jira-leaf-webhook-service/logs/" />
+    <!-- 日志最大的历史天数 -->
+    <property name="maxHistory" value="10"/>
+    <!-- 日志最大的文件Size -->
+    <property name="maxFileSize" value="1GB"/>
+    <!-- 日志格式 -->
+    <!-- %d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+    <property name="log_pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%X{PtxId}] [%X{PspanId}] [%-20marker] [%thread] %logger{36} - %msg%n"/>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${log_pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+	
+    <appender name="file_all" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<file>${log_dir}/${app_name}.all.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+		<fileNamePattern>${log_dir}/%d{yyyy-MM-dd}/${app_name}.%d{yyyy-MM-dd}.%i.all.log</fileNamePattern>
+		<MaxHistory>${maxHistory}</MaxHistory>
+		<maxFileSize>${maxFileSize}</maxFileSize>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+		<Pattern>${log_pattern}</Pattern>
+        </layout>
+    </appender>
+	
+    <appender name="file_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<file>${log_dir}/${app_name}.error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+		<fileNamePattern>${log_dir}/error/${app_name}.%d{yyyy-MM-dd}.%i.error.log</fileNamePattern>
+		<MaxHistory>${maxHistory}</MaxHistory>
+ 		<maxFileSize>${maxFileSize}</maxFileSize>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+ 		<level>ERROR</level>
+ 		<onMatch>ACCEPT</onMatch>
+ 		<onMismatch>DENY</onMismatch>
+        </filter>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+ 		<Pattern>${log_pattern}</Pattern>
+        </layout>
+    </appender>
+	
+    <logger name="org.springframework" level="info"/>
+
+    <root level="info">
+        <appender-ref ref="console"/>
+        <appender-ref ref="file_all"/>
+        <appender-ref ref="file_error"/>
+    </root>
+</configuration>
