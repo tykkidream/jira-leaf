@@ -2,29 +2,19 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.tykkidream</groupId>
-	<artifactId>jira-leaf-webhook</artifactId>
+	<groupId>org.tykkidream.jira-leaf</groupId>
+	<artifactId>jira-leaf-core</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>JIRA-WebHook</name>
+	<name>JIRA-LEAF-CORE</name>
 
 	<modules>
-		<module>jira-leaf-webhook-dingding</module>
-        <module>jira-leaf-webhook-application</module>
-		<module>jira-leaf-webhook-domain</module>
-        <module>jira-leaf-webhook-template</module>
+		<module>jira-leaf-core-domain</module>
+		<module>jira-leaf-core-repository</module>
     </modules>
 
 	<dependencyManagement>
 		<dependencies>
-			<dependency>
-				<groupId>com.dingtalk.open</groupId>
-				<artifactId>taobao-sdk-java-auto</artifactId>
-				<version>1479188381469-20180227</version>
-				<scope>system</scope>
-				<systemPath>${project.basedir}/../lib/taobao-sdk-java-auto_1479188381469-20200520.jar</systemPath>
-			</dependency>
-
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
@@ -66,13 +56,6 @@
 				<artifactId>commons-codec</artifactId>
 				<version>1.14</version>
 			</dependency>
-
-			<dependency>
-				<groupId>org.freemarker</groupId>
-				<artifactId>freemarker</artifactId>
-				<version>2.3.30</version>
-			</dependency>
-
 
 
 
