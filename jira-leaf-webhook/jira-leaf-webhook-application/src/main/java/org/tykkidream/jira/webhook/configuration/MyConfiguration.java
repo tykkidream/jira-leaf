@@ -12,7 +12,7 @@ import java.util.Map;
 
 @Configuration
 @ConfigurationProperties
-@PropertySource(value = "file:config.yml", factory = YamlPropertyResourceFactory.class)
+@PropertySource(value = "config.yml", factory = YamlPropertyResourceFactory.class)
 public class MyConfiguration implements CoinfigUserProfileRepository {
 
 	private List<UserProfile> users;
