@@ -15,9 +15,9 @@ import java.util.List;
 public class DingDingService {
 	private static final Logger logger = LoggerFactory.getLogger(DingDingService.class);
 
-	private String accessToken = "f24f9947234d856e33b2a7af2e448a99261e8a52e524cf483aeda0485539496b";
+	private String accessToken;
 
-	private String secret = "SEC9b2dfe8dac88e17ed1cc7dc11b6d495e9bbdc24ecf3750be7bfa1e91f802fa23";
+	private String secret;
 
 	private long timestamp = 0;
 
@@ -39,6 +39,14 @@ public class DingDingService {
 	}
 
 	private String url() {
+		if (accessToken == null) {
+			throw new RuntimeException("钉钉 WebHook 配置缺失 accessToken 参数配置！");
+		}
+
+		if (secret == null) {
+			throw new RuntimeException("钉钉 WebHook 配置缺失 secret 参数配置！");
+		}
+
 		timestamp = System.currentTimeMillis();
 
 		try {
@@ -128,5 +136,17 @@ public class DingDingService {
 		request.setActionCard(actionCard);
 
 		execute(request);
+	}
+
+	public void setAccessToken(String accessToken) {
+		if (accessToken != null) {
+			this.accessToken = accessToken;
+		}
+	}
+
+	public void setSecret(String secret) {
+		if (secret != null) {
+			this.secret = secret;
+		}
 	}
 }

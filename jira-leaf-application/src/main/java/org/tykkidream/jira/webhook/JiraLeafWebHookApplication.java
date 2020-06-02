@@ -8,7 +8,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
-@ImportResource(locations="classpath:META-INF/spring/jira-leaf-webhook-*.xml")
+@ImportResource(locations="classpath:META-INF/spring/jira-leaf-*.xml")
 public class JiraLeafWebHookApplication extends SpringBootServletInitializer {
     private static final Logger logger = LoggerFactory.getLogger(JiraLeafWebHookApplication.class);
 

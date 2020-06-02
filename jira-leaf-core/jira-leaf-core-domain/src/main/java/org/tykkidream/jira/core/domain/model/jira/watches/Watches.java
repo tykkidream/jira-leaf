@@ -45,11 +45,11 @@ public class Watches {
 		}
 	}
 
-	public Boolean getWatching() {
+	public Boolean getIsWatching() {
 		return isWatching;
 	}
 
-	public void setWatching(Boolean watching) {
+	public void setIsWatching(Boolean watching) {
 		if (watching != null) {
 			isWatching = watching;
 		}

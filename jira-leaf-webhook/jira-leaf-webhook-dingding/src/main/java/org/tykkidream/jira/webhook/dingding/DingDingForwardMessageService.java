@@ -2,6 +2,8 @@ package org.tykkidream.jira.webhook.dingding;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.tykkidream.jira.core.domain.model.jira.watches.Watches;
+import org.tykkidream.jira.core.domain.repository.WatcherRepository;
 import org.tykkidream.jira.webhook.domain.forward.ForwardMessageService;
 import org.tykkidream.jira.webhook.domain.model.WebHookMessage;
 import org.tykkidream.jira.webhook.domain.model.changelog.ChangeLog;
@@ -29,6 +31,8 @@ public class DingDingForwardMessageService implements ForwardMessageService {
 	@Resource
 	private CoinfigUserProfileRepository coinfigUserProfileRepository;
 
+	@Resource
+	private WatcherRepository watcherRepository;
 
 	private static final String ButtonName = "查看详情";
 
@@ -210,19 +214,27 @@ public class DingDingForwardMessageService implements ForwardMessageService {
 
 					String projectUrl = buildProjectUrl(webHookMessage);
 
-					User assignee = webHookMessage.getIssue().getFields().getAssignee();
-
-					UserProfile userProfile = coinfigUserProfileRepository.findUserProfileByUsername(assignee.getName());
+					Watches watches = watcherRepository.findWatches(webHookMessage.getIssue().getFields().getWatches());
 
 					List<String> phones = new LinkedList<>();
 
-					if (userProfile != null) {
-						String phone = userProfile.getPhone();
+					if (watches != null && watches.getIsWatching()) {
 
-						if (phone != null) {
-							phones.add(phone);
+						List<User> watchers = watches.getWatchers();
+
+						for (User watcher : watchers) {
+							UserProfile userProfile = coinfigUserProfileRepository.findUserProfileByUsername(watcher.getName());
+
+							if (userProfile != null) {
+								String phone = userProfile.getPhone();
+
+								if (phone != null) {
+									phones.add(phone);
+								}
+							}
 						}
 					}
+
 
 					Map<String, Object> data = new HashMap<>(3);
 					data.put("webHookMessage", webHookMessage);

@@ -4,7 +4,10 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
        default-lazy-init="true">
 
-    <bean id="dingDingService" class="org.tykkidream.jira.webhook.dingding.DingDingService"/>
+    <bean id="dingDingService" class="org.tykkidream.jira.webhook.dingding.DingDingService">
+           <property name="accessToken" value="${dingding.webhook.accessToken}" />
+           <property name="secret" value="${dingding.webhook.secret}" />
+    </bean>
     <bean id="dingDingForwardMessageService" class="org.tykkidream.jira.webhook.dingding.DingDingForwardMessageService"/>
 
 </beans>
