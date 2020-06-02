@@ -3,29 +3,29 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>org.tykkidream</groupId>
-        <artifactId>jira-leaf-webhook</artifactId>
+        <groupId>org.tykkidream.jira-leaf</groupId>
+        <artifactId>jira-leaf</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>jira-leaf-webhook-application</artifactId>
-    <name>JIRA-WebHook Web应用服务</name>
+    <artifactId>jira-leaf-application</artifactId>
+    <name>JIRA Leaf Web应用服务</name>
 
     <dependencies>
         <dependency>
-            <groupId>org.tykkidream</groupId>
+            <groupId>org.tykkidream.jira-leaf</groupId>
             <artifactId>jira-leaf-webhook-domain</artifactId>
             <version>${parent.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.tykkidream</groupId>
+            <groupId>org.tykkidream.jira-leaf</groupId>
             <artifactId>jira-leaf-webhook-dingding</artifactId>
             <version>${parent.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.tykkidream</groupId>
+            <groupId>org.tykkidream.jira-leaf</groupId>
             <artifactId>jira-leaf-webhook-template</artifactId>
             <version>${parent.version}</version>
         </dependency>
@@ -73,7 +73,7 @@
             <groupId>com.dingtalk.open</groupId>
             <artifactId>taobao-sdk-java-auto</artifactId>
             <scope>system</scope>
-            <systemPath>${project.basedir}/../../lib/taobao-sdk-java-auto_1479188381469-20200520.jar</systemPath>
+            <systemPath>${project.basedir}/../lib/taobao-sdk-java-auto_1479188381469-20200520.jar</systemPath>
         </dependency>
     </dependencies>
 

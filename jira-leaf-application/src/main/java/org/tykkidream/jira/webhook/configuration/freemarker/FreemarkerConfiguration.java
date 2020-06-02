@@ -9,7 +9,7 @@ import org.tykkidream.jira.webhook.template.FreeMarkerService;
 public class FreemarkerConfiguration {
 
 	@Bean
-	public FreeMarkerApplicationContext FreeMarkerApplicationContext() {
+	public FreeMarkerApplicationContext freeMarkerApplicationContext() {
 		FreeMarkerApplicationContext context = new FreeMarkerApplicationContext();
 
 		context.loadClasspath("/META-INF/freemarker");
