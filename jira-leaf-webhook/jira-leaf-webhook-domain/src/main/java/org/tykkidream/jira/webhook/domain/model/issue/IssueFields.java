@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.tykkidream.jira.webhook.domain.model.Priority;
 import org.tykkidream.jira.webhook.domain.model.project.Project;
-import org.tykkidream.jira.webhook.domain.model.user.User;
+import org.tykkidream.jira.core.domain.model.jira.user.User;
 import org.tykkidream.jira.webhook.domain.model.watches.Watches;
 
 import java.util.Date;

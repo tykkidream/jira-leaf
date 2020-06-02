@@ -1,6 +1,6 @@
 package org.tykkidream.jira.webhook.domain.model.project;
 
-import org.tykkidream.jira.webhook.domain.model.AvatarUrls;
+import org.tykkidream.jira.core.domain.model.jira.AvatarUrls;
 
 /**
  * 项目

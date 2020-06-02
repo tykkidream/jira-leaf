@@ -1,6 +1,6 @@
-package org.tykkidream.jira.webhook.domain.model.user;
+package org.tykkidream.jira.core.domain.model.jira.user;
 
-import org.tykkidream.jira.webhook.domain.model.AvatarUrls;
+import org.tykkidream.jira.core.domain.model.jira.AvatarUrls;
 
 /**
  * 用户

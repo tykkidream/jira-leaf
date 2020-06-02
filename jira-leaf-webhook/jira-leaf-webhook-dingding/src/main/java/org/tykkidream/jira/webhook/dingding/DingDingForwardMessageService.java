@@ -7,7 +7,7 @@ import org.tykkidream.jira.webhook.domain.model.WebHookMessage;
 import org.tykkidream.jira.webhook.domain.model.changelog.ChangeLog;
 import org.tykkidream.jira.webhook.domain.model.changelog.ChangeLogItem;
 import org.tykkidream.jira.webhook.domain.model.config.user.UserProfile;
-import org.tykkidream.jira.webhook.domain.model.user.User;
+import org.tykkidream.jira.core.domain.model.jira.user.User;
 import org.tykkidream.jira.webhook.domain.repository.CoinfigUserProfileRepository;
 import org.tykkidream.jira.webhook.template.FreeMarkerService;
 

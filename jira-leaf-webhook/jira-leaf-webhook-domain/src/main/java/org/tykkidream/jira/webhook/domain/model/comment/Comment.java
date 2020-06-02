@@ -1,6 +1,6 @@
 package org.tykkidream.jira.webhook.domain.model.comment;
 
-import org.tykkidream.jira.webhook.domain.model.user.User;
+import org.tykkidream.jira.core.domain.model.jira.user.User;
 
 import java.util.Date;
 

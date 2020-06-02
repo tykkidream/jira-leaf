@@ -1,4 +1,4 @@
-package org.tykkidream.jira.webhook.domain.model;
+package org.tykkidream.jira.core.domain.model.jira;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
