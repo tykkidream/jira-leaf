@@ -14,6 +14,11 @@
     <name>JIRA-WebHook 核心领域</name>
 
     <dependencies>
+        <dependency>
+            <groupId>org.tykkidream.jira-leaf</groupId>
+            <artifactId>jira-leaf-core-domain</artifactId>
+            <version>${parent.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>

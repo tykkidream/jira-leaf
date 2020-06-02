@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>org.tykkidream.jira-leaf</groupId>
-        <artifactId>jira-leaf-core</artifactId>
+        <artifactId>jira-leaf</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../</relativePath>
+        <relativePath>../../</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -15,8 +15,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.tykkidream</groupId>
-            <artifactId>jira-leaf-webhook-domain</artifactId>
+            <groupId>org.tykkidream.jira-leaf</groupId>
+            <artifactId>jira-leaf-core-domain</artifactId>
             <version>${parent.version}</version>
         </dependency>
 
