@@ -14,7 +14,6 @@
 		<module>jira-leaf-core/jira-leaf-core-domain</module>
 		<module>jira-leaf-core/jira-leaf-core-repository</module>
 
-		<module>jira-leaf-webhook/jira-leaf-webhook-domain</module>
 		<module>jira-leaf-webhook/jira-leaf-webhook-dingding</module>
         <module>jira-leaf-webhook/jira-leaf-webhook-template</module>
     </modules>

@@ -17,7 +17,7 @@
     <dependencies>
         <dependency>
             <groupId>org.tykkidream.jira-leaf</groupId>
-            <artifactId>jira-leaf-webhook-domain</artifactId>
+            <artifactId>jira-leaf-core-domain</artifactId>
             <version>${parent.version}</version>
         </dependency>
         <dependency>

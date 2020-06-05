@@ -1,4 +1,4 @@
-package org.tykkidream.jira.core.domain.repository;
+package org.tykkidream.jira.core.domain.repository.jira;
 
 import org.tykkidream.jira.core.domain.model.jira.watches.Watches;
 

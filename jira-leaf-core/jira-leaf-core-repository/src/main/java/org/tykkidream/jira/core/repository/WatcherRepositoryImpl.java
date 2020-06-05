@@ -1,7 +1,7 @@
 package org.tykkidream.jira.core.repository;
 
 import org.tykkidream.jira.core.domain.model.jira.watches.Watches;
-import org.tykkidream.jira.core.domain.repository.WatcherRepository;
+import org.tykkidream.jira.core.domain.repository.jira.WatcherRepository;
 
 import javax.annotation.Resource;
 

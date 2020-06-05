@@ -1,7 +1,7 @@
 package org.tykkidream.jira.webhook.application;
 
 import org.tykkidream.jira.webhook.configuration.MyConfiguration;
-import org.tykkidream.jira.webhook.domain.forward.ForwardMessageService;
+import org.tykkidream.jira.core.domain.forward.ForwardMessageService;
 import org.tykkidream.jira.core.domain.model.jira.WebHookEvent;
 import org.tykkidream.jira.core.domain.model.jira.WebHookMessage;
 import org.tykkidream.jira.core.domain.model.jira.issue.IssueEventType;

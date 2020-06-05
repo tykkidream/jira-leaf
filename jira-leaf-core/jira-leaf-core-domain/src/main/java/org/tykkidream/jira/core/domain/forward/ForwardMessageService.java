@@ -1,4 +1,4 @@
-package org.tykkidream.jira.webhook.domain.forward;
+package org.tykkidream.jira.core.domain.forward;
 
 import org.tykkidream.jira.core.domain.model.jira.WebHookMessage;
 
