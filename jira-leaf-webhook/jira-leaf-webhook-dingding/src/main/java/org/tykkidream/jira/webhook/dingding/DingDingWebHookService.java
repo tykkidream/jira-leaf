@@ -39,15 +39,9 @@ public class DingDingWebHookService implements ProviderWebHookService {
 	public void comment(WebHookMessage webHookMessage) {
 		String summary = webHookMessage.getIssue().getFields().getSummary();
 
-		String issueUrl = buildIssueUrl(webHookMessage);
+		Map<String, Object> data = new HashMap<>();
 
-		String projectUrl = buildProjectUrl(webHookMessage);
-
-
-		Map<String, Object> data = new HashMap<>(2);
-		data.put("webHookMessage", webHookMessage);
-		data.put("issueUrl", issueUrl);
-		data.put("projectUrl", projectUrl);
+		String issueUrl = buildIssueUrlAndOther(data, webHookMessage);
 
 		String content = freeMarkerService.comment("dingding/comment.ftl", data);
 
@@ -70,9 +64,9 @@ public class DingDingWebHookService implements ProviderWebHookService {
 		if (changeLogItem.isAssigneeChangeLog()) {
 			String summary = webHookMessage.getIssue().getFields().getSummary();
 
-			String issueUrl = buildIssueUrl(webHookMessage);
+			Map<String, Object> data = new HashMap<>();
 
-			String projectUrl = buildProjectUrl(webHookMessage);
+			String issueUrl = buildIssueUrlAndOther(data, webHookMessage);
 
 			User assignee = webHookMessage.getIssue().getFields().getAssignee();
 
@@ -88,11 +82,6 @@ public class DingDingWebHookService implements ProviderWebHookService {
 				}
 			}
 
-			Map<String, Object> data = new HashMap<>(2);
-			data.put("webHookMessage", webHookMessage);
-			data.put("issueUrl", issueUrl);
-			data.put("projectUrl", projectUrl);
-
 			String content = freeMarkerService.comment("dingding/assignee.ftl", data);
 
 			dingDingService.sendActionCard(summary, content, phones, ButtonName, issueUrl);
@@ -104,9 +93,9 @@ public class DingDingWebHookService implements ProviderWebHookService {
 	public void resolved(WebHookMessage webHookMessage) {
 		String summary = webHookMessage.getIssue().getFields().getSummary();
 
-		String issueUrl = buildIssueUrl(webHookMessage);
+		Map<String, Object> data = new HashMap<>();
 
-		String projectUrl = buildProjectUrl(webHookMessage);
+		String issueUrl = buildIssueUrlAndOther(data, webHookMessage);
 
 		User assignee = webHookMessage.getIssue().getFields().getAssignee();
 
@@ -121,11 +110,6 @@ public class DingDingWebHookService implements ProviderWebHookService {
 				phones.add(phone);
 			}
 		}
-
-		Map<String, Object> data = new HashMap<>(2);
-		data.put("webHookMessage", webHookMessage);
-		data.put("issueUrl", issueUrl);
-		data.put("projectUrl", projectUrl);
 
 		String content = freeMarkerService.comment("dingding/resolved.ftl", data);
 
@@ -136,9 +120,9 @@ public class DingDingWebHookService implements ProviderWebHookService {
 	public void closed(WebHookMessage webHookMessage) {
 		String summary = webHookMessage.getIssue().getFields().getSummary();
 
-		String issueUrl = buildIssueUrl(webHookMessage);
+		Map<String, Object> data = new HashMap<>();
 
-		String projectUrl = buildProjectUrl(webHookMessage);
+		String issueUrl = buildIssueUrlAndOther(data, webHookMessage);
 
 		User assignee = webHookMessage.getIssue().getFields().getAssignee();
 
@@ -153,11 +137,6 @@ public class DingDingWebHookService implements ProviderWebHookService {
 				phones.add(phone);
 			}
 		}
-
-		Map<String, Object> data = new HashMap<>(2);
-		data.put("webHookMessage", webHookMessage);
-		data.put("issueUrl", issueUrl);
-		data.put("projectUrl", projectUrl);
 
 		String content = freeMarkerService.comment("dingding/closed.ftl", data);
 
@@ -169,9 +148,9 @@ public class DingDingWebHookService implements ProviderWebHookService {
 	public void reopened(WebHookMessage webHookMessage) {
 		String summary = webHookMessage.getIssue().getFields().getSummary();
 
-		String issueUrl = buildIssueUrl(webHookMessage);
+		Map<String, Object> data = new HashMap<>();
 
-		String projectUrl = buildProjectUrl(webHookMessage);
+		String issueUrl = buildIssueUrlAndOther(data, webHookMessage);
 
 		User assignee = webHookMessage.getIssue().getFields().getAssignee();
 
@@ -186,11 +165,6 @@ public class DingDingWebHookService implements ProviderWebHookService {
 				phones.add(phone);
 			}
 		}
-
-		Map<String, Object> data = new HashMap<>(3);
-		data.put("webHookMessage", webHookMessage);
-		data.put("issueUrl", issueUrl);
-		data.put("projectUrl", projectUrl);
 
 		String content = freeMarkerService.comment("dingding/reopened.ftl", data);
 
@@ -210,9 +184,9 @@ public class DingDingWebHookService implements ProviderWebHookService {
 				&& !changeLogItem.getFromString().equals("Done")) {
 					String summary = webHookMessage.getIssue().getFields().getSummary();
 
-					String issueUrl = buildIssueUrl(webHookMessage);
+					Map<String, Object> data = new HashMap<>();
 
-					String projectUrl = buildProjectUrl(webHookMessage);
+					String issueUrl = buildIssueUrlAndOther(data, webHookMessage);
 
 					Watches watches = watcherRepository.findWatches(webHookMessage.getIssue().getFields().getWatches());
 
@@ -235,18 +209,24 @@ public class DingDingWebHookService implements ProviderWebHookService {
 						}
 					}
 
-
-					Map<String, Object> data = new HashMap<>(3);
-					data.put("webHookMessage", webHookMessage);
-					data.put("issueUrl", issueUrl);
-					data.put("projectUrl", projectUrl);
-
 					String content = freeMarkerService.comment("dingding/done.ftl", data);
 
 					dingDingService.sendActionCard(summary, content, phones, ButtonName, issueUrl);
 				}
 			}
 		}
+	}
+
+	private String buildIssueUrlAndOther(Map<String, Object> data, WebHookMessage webHookMessage) {
+		String issueUrl = buildIssueUrl(webHookMessage);
+
+		String projectUrl = buildProjectUrl(webHookMessage);
+
+		data.put("webHookMessage", webHookMessage);
+		data.put("issueUrl", issueUrl);
+		data.put("projectUrl", projectUrl);
+
+		return issueUrl;
 	}
 
 	private String buildIssueUrl(WebHookMessage webHookMessage) {
