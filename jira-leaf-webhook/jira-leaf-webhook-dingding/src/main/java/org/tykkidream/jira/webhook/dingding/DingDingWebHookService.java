@@ -4,13 +4,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tykkidream.jira.core.domain.model.jira.watches.Watches;
 import org.tykkidream.jira.core.domain.repository.jira.WatcherRepository;
-import org.tykkidream.jira.core.domain.forward.ForwardMessageService;
 import org.tykkidream.jira.core.domain.model.jira.WebHookMessage;
 import org.tykkidream.jira.core.domain.model.jira.changelog.ChangeLog;
 import org.tykkidream.jira.core.domain.model.jira.changelog.ChangeLogItem;
 import org.tykkidream.jira.core.domain.model.config.UserProfile;
 import org.tykkidream.jira.core.domain.model.jira.user.User;
 import org.tykkidream.jira.core.domain.repository.ConfigUserProfileRepository;
+import org.tykkidream.jira.webhook.provider.ProviderWebHookService;
 import org.tykkidream.jira.webhook.template.FreeMarkerService;
 
 import javax.annotation.Resource;
@@ -19,8 +19,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class DingDingForwardMessageService implements ForwardMessageService {
-	private static final Logger logger = LoggerFactory.getLogger(DingDingForwardMessageService.class);
+public class DingDingWebHookService implements ProviderWebHookService {
+	private static final Logger logger = LoggerFactory.getLogger(DingDingWebHookService.class);
 
 	@Resource
 	private FreeMarkerService freeMarkerService;

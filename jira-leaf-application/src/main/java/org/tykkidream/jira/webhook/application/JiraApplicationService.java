@@ -1,10 +1,10 @@
 package org.tykkidream.jira.webhook.application;
 
 import org.tykkidream.jira.webhook.configuration.MyConfiguration;
-import org.tykkidream.jira.core.domain.forward.ForwardMessageService;
 import org.tykkidream.jira.core.domain.model.jira.WebHookEvent;
 import org.tykkidream.jira.core.domain.model.jira.WebHookMessage;
 import org.tykkidream.jira.core.domain.model.jira.issue.IssueEventType;
+import org.tykkidream.jira.webhook.provider.ProviderWebHookService;
 import org.tykkidream.jira.webhook.util.JsonUtil;
 
 import javax.annotation.Resource;
@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 public class JiraApplicationService {
 
 	@Resource
-	private ForwardMessageService forwardMessageService;
+	private ProviderWebHookService providerWebHookService;
 
 	@Resource
 	private MyConfiguration myConfiguration;
@@ -40,34 +40,34 @@ public class JiraApplicationService {
 				return;
 			} else if (issueEventType.isIssueCommented()) {
 				// 添加备注
-				forwardMessageService.comment(webHookMessage);
+				providerWebHookService.comment(webHookMessage);
 			} else if (issueEventType.isIssueAssigned()) {
 				// 分配经办人
-				forwardMessageService.changeLog(webHookMessage);
+				providerWebHookService.changeLog(webHookMessage);
 			} else if (issueEventType.isIssueUpdated()) {
 				//
-				forwardMessageService.changeLog(webHookMessage);
+				providerWebHookService.changeLog(webHookMessage);
 			} else if (issueEventType.isIssueResolved()) {
 				// 问题被解决
-				forwardMessageService.resolved(webHookMessage);
+				providerWebHookService.resolved(webHookMessage);
 			} else if (issueEventType.isIssueClosed()) {
 				// 问题被关闭
-				forwardMessageService.closed(webHookMessage);
+				providerWebHookService.closed(webHookMessage);
 			} else if (issueEventType.isIssueReopened()) {
 				// 问题被重打开
-				forwardMessageService.reopened(webHookMessage);
+				providerWebHookService.reopened(webHookMessage);
 			} else if (issueEventType.isIssueGeneric()) {
 				// 问题被重打开
-				forwardMessageService.generic(webHookMessage);
+				providerWebHookService.generic(webHookMessage);
 			}
 
 		}
 
 	}
 
-	public void setForwardMessageService(ForwardMessageService forwardMessageService) {
-		if (forwardMessageService != null) {
-			this.forwardMessageService = forwardMessageService;
+	public void setProviderWebHookService(ProviderWebHookService providerWebHookService) {
+		if (providerWebHookService != null) {
+			this.providerWebHookService = providerWebHookService;
 		}
 	}
 }

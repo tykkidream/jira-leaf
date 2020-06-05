@@ -1,8 +1,8 @@
-package org.tykkidream.jira.core.domain.forward;
+package org.tykkidream.jira.webhook.provider;
 
 import org.tykkidream.jira.core.domain.model.jira.WebHookMessage;
 
-public interface ForwardMessageService {
+public interface ProviderWebHookService {
 	/**
 	 * 新备注通知
 	 * @param webHookMessage

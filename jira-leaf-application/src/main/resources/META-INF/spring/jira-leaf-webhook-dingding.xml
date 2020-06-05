@@ -8,6 +8,6 @@
            <property name="accessToken" value="${dingding.webhook.accessToken}" />
            <property name="secret" value="${dingding.webhook.secret}" />
     </bean>
-    <bean id="dingDingForwardMessageService" class="org.tykkidream.jira.webhook.dingding.DingDingForwardMessageService"/>
+    <bean id="dingDingForwardMessageService" class="org.tykkidream.jira.webhook.dingding.DingDingWebHookService"/>
 
 </beans>

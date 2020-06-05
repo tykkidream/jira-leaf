@@ -26,6 +26,11 @@
         </dependency>
         <dependency>
             <groupId>org.tykkidream.jira-leaf</groupId>
+            <artifactId>jira-leaf-webhook-provider</artifactId>
+            <version>${parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tykkidream.jira-leaf</groupId>
             <artifactId>jira-leaf-webhook-dingding</artifactId>
             <version>${parent.version}</version>
         </dependency>
