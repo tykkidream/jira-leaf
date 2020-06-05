@@ -33,6 +33,12 @@
             <groupId>org.tykkidream.jira-leaf</groupId>
             <artifactId>jira-leaf-webhook-dingding</artifactId>
             <version>${parent.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.dingtalk.open</groupId>
+                    <artifactId>taobao-sdk-java-auto</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.tykkidream.jira-leaf</groupId>
