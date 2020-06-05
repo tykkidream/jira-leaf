@@ -1,9 +1,9 @@
-package org.tykkidream.jira.webhook.domain.model.issue;
+package org.tykkidream.jira.core.domain.model.jira.issue;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.tykkidream.jira.webhook.domain.model.Priority;
-import org.tykkidream.jira.webhook.domain.model.project.Project;
+import org.tykkidream.jira.core.domain.model.jira.Priority;
+import org.tykkidream.jira.core.domain.model.jira.project.Project;
 import org.tykkidream.jira.core.domain.model.jira.user.User;
 import org.tykkidream.jira.core.domain.model.jira.watches.Watches;
 

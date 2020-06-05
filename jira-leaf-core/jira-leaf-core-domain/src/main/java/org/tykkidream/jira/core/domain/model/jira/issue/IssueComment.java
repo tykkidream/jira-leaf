@@ -1,6 +1,6 @@
-package org.tykkidream.jira.webhook.domain.model.issue;
+package org.tykkidream.jira.core.domain.model.jira.issue;
 
-import org.tykkidream.jira.webhook.domain.model.comment.Comment;
+import org.tykkidream.jira.core.domain.model.jira.comment.Comment;
 
 import java.util.List;
 

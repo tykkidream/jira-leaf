@@ -6,8 +6,8 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.springframework.context.annotation.Configuration;
 import org.tykkidream.jira.webhook.configuration.jackson.deserializer.IssueEventTypeDeserializer;
 import org.tykkidream.jira.webhook.configuration.jackson.deserializer.WebHookEventDeserializer;
-import org.tykkidream.jira.webhook.domain.model.WebHookEvent;
-import org.tykkidream.jira.webhook.domain.model.issue.IssueEventType;
+import org.tykkidream.jira.core.domain.model.jira.WebHookEvent;
+import org.tykkidream.jira.core.domain.model.jira.issue.IssueEventType;
 import org.tykkidream.jira.webhook.util.JsonUtil;
 
 import javax.annotation.PostConstruct;

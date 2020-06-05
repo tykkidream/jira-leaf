@@ -1,4 +1,4 @@
-package org.tykkidream.jira.webhook.domain.model;
+package org.tykkidream.jira.core.domain.model.jira;
 
 /**
  * 事件

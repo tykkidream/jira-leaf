@@ -1,11 +1,11 @@
-package org.tykkidream.jira.webhook.domain.model;
+package org.tykkidream.jira.core.domain.model.jira;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.tykkidream.jira.webhook.domain.model.changelog.ChangeLog;
-import org.tykkidream.jira.webhook.domain.model.comment.Comment;
-import org.tykkidream.jira.webhook.domain.model.issue.Issue;
-import org.tykkidream.jira.webhook.domain.model.issue.IssueEventType;
+import org.tykkidream.jira.core.domain.model.jira.changelog.ChangeLog;
+import org.tykkidream.jira.core.domain.model.jira.comment.Comment;
+import org.tykkidream.jira.core.domain.model.jira.issue.Issue;
+import org.tykkidream.jira.core.domain.model.jira.issue.IssueEventType;
 import org.tykkidream.jira.core.domain.model.jira.user.User;
 
 import java.util.Date;

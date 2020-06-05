@@ -1,4 +1,4 @@
-package org.tykkidream.jira.webhook.domain.model.comment;
+package org.tykkidream.jira.core.domain.model.jira.comment;
 
 import org.tykkidream.jira.core.domain.model.jira.user.User;
 

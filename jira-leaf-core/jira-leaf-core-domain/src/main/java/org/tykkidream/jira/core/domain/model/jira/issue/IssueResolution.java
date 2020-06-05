@@ -1,17 +1,17 @@
-package org.tykkidream.jira.webhook.domain.model.issue;
+package org.tykkidream.jira.core.domain.model.jira.issue;
 
-public class IssueStatus {
+/**
+ * 问题解决信息
+ */
+public class IssueResolution {
+
 	private String self;
 
 	private String id;
 
 	private String description;
 
-	private String iconUrl;
-
 	private String name;
-
-	private IssueStatusCategory statusCategory;
 
 	public String getSelf() {
 		return self;
@@ -43,16 +43,6 @@ public class IssueStatus {
 		}
 	}
 
-	public String getIconUrl() {
-		return iconUrl;
-	}
-
-	public void setIconUrl(String iconUrl) {
-		if (iconUrl != null) {
-			this.iconUrl = iconUrl;
-		}
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -60,16 +50,6 @@ public class IssueStatus {
 	public void setName(String name) {
 		if (name != null) {
 			this.name = name;
-		}
-	}
-
-	public IssueStatusCategory getStatusCategory() {
-		return statusCategory;
-	}
-
-	public void setStatusCategory(IssueStatusCategory statusCategory) {
-		if (statusCategory != null) {
-			this.statusCategory = statusCategory;
 		}
 	}
 }

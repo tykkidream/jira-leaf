@@ -3,8 +3,8 @@ package org.tykkidream.jira.webhook.configuration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.tykkidream.jira.webhook.domain.model.config.user.UserProfile;
-import org.tykkidream.jira.webhook.domain.repository.CoinfigUserProfileRepository;
+import org.tykkidream.jira.core.domain.model.config.UserProfile;
+import org.tykkidream.jira.core.domain.repository.ConfigUserProfileRepository;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.Map;
 @Configuration
 @ConfigurationProperties
 @PropertySource(value = "config.yml", factory = YamlPropertyResourceFactory.class)
-public class MyConfiguration implements CoinfigUserProfileRepository {
+public class MyConfiguration implements ConfigUserProfileRepository {
 
 	private List<UserProfile> users;
 

@@ -1,4 +1,4 @@
-package org.tykkidream.jira.webhook.domain.model.issue;
+package org.tykkidream.jira.core.domain.model.jira.issue;
 
 import java.util.List;
 

@@ -1,7 +1,6 @@
-package org.tykkidream.jira.webhook.domain.model.issue;
+package org.tykkidream.jira.core.domain.model.jira.issue;
 
-public class IssueType {
-
+public class IssueStatus {
 	private String self;
 
 	private String id;
@@ -10,12 +9,9 @@ public class IssueType {
 
 	private String iconUrl;
 
-	/**
-	 * 类型名称，如故事
-	 */
 	private String name;
 
-	private Boolean subtask;
+	private IssueStatusCategory statusCategory;
 
 	public String getSelf() {
 		return self;
@@ -67,13 +63,13 @@ public class IssueType {
 		}
 	}
 
-	public Boolean getSubtask() {
-		return subtask;
+	public IssueStatusCategory getStatusCategory() {
+		return statusCategory;
 	}
 
-	public void setSubtask(Boolean subtask) {
-		if (subtask != null) {
-			this.subtask = subtask;
+	public void setStatusCategory(IssueStatusCategory statusCategory) {
+		if (statusCategory != null) {
+			this.statusCategory = statusCategory;
 		}
 	}
 }

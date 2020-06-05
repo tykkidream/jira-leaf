@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
-import org.tykkidream.jira.webhook.domain.model.WebHookEvent;
+import org.tykkidream.jira.core.domain.model.jira.WebHookEvent;
 
 import java.io.IOException;
 

@@ -1,23 +1,21 @@
-package org.tykkidream.jira.webhook.domain.model.project;
+package org.tykkidream.jira.core.domain.model.jira.issue;
 
-/**
- * 项目分类
- */
-public class ProjectCategory {
+public class IssueType {
 
 	private String self;
 
 	private String id;
 
-	/**
-	 * 分类描述
-	 */
 	private String description;
 
+	private String iconUrl;
+
 	/**
-	 * 分类名称
+	 * 类型名称，如故事
 	 */
 	private String name;
+
+	private Boolean subtask;
 
 	public String getSelf() {
 		return self;
@@ -49,6 +47,16 @@ public class ProjectCategory {
 		}
 	}
 
+	public String getIconUrl() {
+		return iconUrl;
+	}
+
+	public void setIconUrl(String iconUrl) {
+		if (iconUrl != null) {
+			this.iconUrl = iconUrl;
+		}
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -56,6 +64,16 @@ public class ProjectCategory {
 	public void setName(String name) {
 		if (name != null) {
 			this.name = name;
+		}
+	}
+
+	public Boolean getSubtask() {
+		return subtask;
+	}
+
+	public void setSubtask(Boolean subtask) {
+		if (subtask != null) {
+			this.subtask = subtask;
 		}
 	}
 }

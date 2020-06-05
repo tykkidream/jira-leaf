@@ -1,4 +1,4 @@
-package org.tykkidream.jira.webhook.domain.model.changelog;
+package org.tykkidream.jira.core.domain.model.jira.changelog;
 
 import java.util.List;
 

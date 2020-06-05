@@ -1,14 +1,22 @@
-package org.tykkidream.jira.webhook.domain.model.issue;
+package org.tykkidream.jira.core.domain.model.jira.project;
 
-public class IssueStatusCategory {
+/**
+ * 项目分类
+ */
+public class ProjectCategory {
+
 	private String self;
 
 	private String id;
 
-	private String key;
+	/**
+	 * 分类描述
+	 */
+	private String description;
 
-	private String colorName;
-
+	/**
+	 * 分类名称
+	 */
 	private String name;
 
 	public String getSelf() {
@@ -31,23 +39,13 @@ public class IssueStatusCategory {
 		}
 	}
 
-	public String getKey() {
-		return key;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setKey(String key) {
-		if (key != null) {
-			this.key = key;
-		}
-	}
-
-	public String getColorName() {
-		return colorName;
-	}
-
-	public void setColorName(String colorName) {
-		if (colorName != null) {
-			this.colorName = colorName;
+	public void setDescription(String description) {
+		if (description != null) {
+			this.description = description;
 		}
 	}
 

@@ -1,6 +1,6 @@
 package org.tykkidream.jira.webhook.domain.forward;
 
-import org.tykkidream.jira.webhook.domain.model.WebHookMessage;
+import org.tykkidream.jira.core.domain.model.jira.WebHookMessage;
 
 public interface ForwardMessageService {
 	/**

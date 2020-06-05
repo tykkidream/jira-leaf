@@ -5,12 +5,12 @@ import org.slf4j.LoggerFactory;
 import org.tykkidream.jira.core.domain.model.jira.watches.Watches;
 import org.tykkidream.jira.core.domain.repository.WatcherRepository;
 import org.tykkidream.jira.webhook.domain.forward.ForwardMessageService;
-import org.tykkidream.jira.webhook.domain.model.WebHookMessage;
-import org.tykkidream.jira.webhook.domain.model.changelog.ChangeLog;
-import org.tykkidream.jira.webhook.domain.model.changelog.ChangeLogItem;
-import org.tykkidream.jira.webhook.domain.model.config.user.UserProfile;
+import org.tykkidream.jira.core.domain.model.jira.WebHookMessage;
+import org.tykkidream.jira.core.domain.model.jira.changelog.ChangeLog;
+import org.tykkidream.jira.core.domain.model.jira.changelog.ChangeLogItem;
+import org.tykkidream.jira.core.domain.model.config.UserProfile;
 import org.tykkidream.jira.core.domain.model.jira.user.User;
-import org.tykkidream.jira.webhook.domain.repository.CoinfigUserProfileRepository;
+import org.tykkidream.jira.core.domain.repository.ConfigUserProfileRepository;
 import org.tykkidream.jira.webhook.template.FreeMarkerService;
 
 import javax.annotation.Resource;
@@ -29,7 +29,7 @@ public class DingDingForwardMessageService implements ForwardMessageService {
 	private DingDingService dingDingService;
 
 	@Resource
-	private CoinfigUserProfileRepository coinfigUserProfileRepository;
+	private ConfigUserProfileRepository configUserProfileRepository;
 
 	@Resource
 	private WatcherRepository watcherRepository;
@@ -76,7 +76,7 @@ public class DingDingForwardMessageService implements ForwardMessageService {
 
 			User assignee = webHookMessage.getIssue().getFields().getAssignee();
 
-			UserProfile userProfile = coinfigUserProfileRepository.findUserProfileByUsername(assignee.getName());
+			UserProfile userProfile = configUserProfileRepository.findUserProfileByUsername(assignee.getName());
 
 			List<String> phones = new LinkedList<>();
 
@@ -110,7 +110,7 @@ public class DingDingForwardMessageService implements ForwardMessageService {
 
 		User assignee = webHookMessage.getIssue().getFields().getAssignee();
 
-		UserProfile userProfile = coinfigUserProfileRepository.findUserProfileByUsername(assignee.getName());
+		UserProfile userProfile = configUserProfileRepository.findUserProfileByUsername(assignee.getName());
 
 		List<String> phones = new LinkedList<>();
 
@@ -142,7 +142,7 @@ public class DingDingForwardMessageService implements ForwardMessageService {
 
 		User assignee = webHookMessage.getIssue().getFields().getAssignee();
 
-		UserProfile userProfile = coinfigUserProfileRepository.findUserProfileByUsername(assignee.getName());
+		UserProfile userProfile = configUserProfileRepository.findUserProfileByUsername(assignee.getName());
 
 		List<String> phones = new LinkedList<>();
 
@@ -175,7 +175,7 @@ public class DingDingForwardMessageService implements ForwardMessageService {
 
 		User assignee = webHookMessage.getIssue().getFields().getAssignee();
 
-		UserProfile userProfile = coinfigUserProfileRepository.findUserProfileByUsername(assignee.getName());
+		UserProfile userProfile = configUserProfileRepository.findUserProfileByUsername(assignee.getName());
 
 		List<String> phones = new LinkedList<>();
 
@@ -223,7 +223,7 @@ public class DingDingForwardMessageService implements ForwardMessageService {
 						List<User> watchers = watches.getWatchers();
 
 						for (User watcher : watchers) {
-							UserProfile userProfile = coinfigUserProfileRepository.findUserProfileByUsername(watcher.getName());
+							UserProfile userProfile = configUserProfileRepository.findUserProfileByUsername(watcher.getName());
 
 							if (userProfile != null) {
 								String phone = userProfile.getPhone();

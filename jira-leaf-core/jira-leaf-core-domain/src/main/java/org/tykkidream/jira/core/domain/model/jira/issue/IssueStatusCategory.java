@@ -1,15 +1,13 @@
-package org.tykkidream.jira.webhook.domain.model.issue;
+package org.tykkidream.jira.core.domain.model.jira.issue;
 
-/**
- * 问题解决信息
- */
-public class IssueResolution {
-
+public class IssueStatusCategory {
 	private String self;
 
 	private String id;
 
-	private String description;
+	private String key;
+
+	private String colorName;
 
 	private String name;
 
@@ -33,13 +31,23 @@ public class IssueResolution {
 		}
 	}
 
-	public String getDescription() {
-		return description;
+	public String getKey() {
+		return key;
 	}
 
-	public void setDescription(String description) {
-		if (description != null) {
-			this.description = description;
+	public void setKey(String key) {
+		if (key != null) {
+			this.key = key;
+		}
+	}
+
+	public String getColorName() {
+		return colorName;
+	}
+
+	public void setColorName(String colorName) {
+		if (colorName != null) {
+			this.colorName = colorName;
 		}
 	}
 
