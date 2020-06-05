@@ -2,14 +2,13 @@ package org.tykkidream.jira.webhook.dingding;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.tykkidream.jira.core.domain.model.jira.watches.Watches;
-import org.tykkidream.jira.core.domain.repository.jira.WatcherRepository;
-import org.tykkidream.jira.core.domain.model.jira.WebHookMessage;
-import org.tykkidream.jira.core.domain.model.jira.changelog.ChangeLog;
-import org.tykkidream.jira.core.domain.model.jira.changelog.ChangeLogItem;
 import org.tykkidream.jira.core.domain.model.config.UserProfile;
+import org.tykkidream.jira.core.domain.model.jira.WebHookMessage;
+import org.tykkidream.jira.core.domain.model.jira.changelog.ChangeLogItem;
 import org.tykkidream.jira.core.domain.model.jira.user.User;
+import org.tykkidream.jira.core.domain.model.jira.watches.Watches;
 import org.tykkidream.jira.core.domain.repository.ConfigUserProfileRepository;
+import org.tykkidream.jira.core.domain.repository.jira.WatcherRepository;
 import org.tykkidream.jira.webhook.provider.ProviderWebHookService;
 import org.tykkidream.jira.webhook.template.FreeMarkerService;
 
@@ -36,184 +35,74 @@ public class DingDingWebHookService implements ProviderWebHookService {
 
 	private static final String ButtonName = "查看详情";
 
+	@Override
 	public void comment(WebHookMessage webHookMessage) {
-		String summary = webHookMessage.getIssue().getFields().getSummary();
-
-		Map<String, Object> data = new HashMap<>();
-
-		String issueUrl = buildIssueUrlAndOther(data, webHookMessage);
-
-		String content = freeMarkerService.comment("dingding/comment.ftl", data);
-
-		if (logger.isDebugEnabled()) {
-			logger.debug("推送钉钉消息：{}", content);
-		}
-
-		// dingDingService.sendMarkdown(summary, content, null);
-		dingDingService.sendActionCard(summary, content, null, ButtonName, issueUrl);
+		sendActionCard(webHookMessage, "dingding/comment.ftl", true);
 	}
 
 	@Override
 	public void changeLog(WebHookMessage webHookMessage) {
-		ChangeLog changeLog = webHookMessage.getChangeLog();
-
-		List<ChangeLogItem> changeLogItems = changeLog.getItems();
-
-		ChangeLogItem changeLogItem = changeLogItems.get(0);
+		ChangeLogItem changeLogItem = webHookMessage.getChangeLog().getItems().get(0);
 
 		if (changeLogItem.isAssigneeChangeLog()) {
-			String summary = webHookMessage.getIssue().getFields().getSummary();
-
-			Map<String, Object> data = new HashMap<>();
-
-			String issueUrl = buildIssueUrlAndOther(data, webHookMessage);
-
-			User assignee = webHookMessage.getIssue().getFields().getAssignee();
-
-			UserProfile userProfile = configUserProfileRepository.findUserProfileByUsername(assignee.getName());
-
-			List<String> phones = new LinkedList<>();
-
-			if (userProfile != null) {
-				String phone = userProfile.getPhone();
-
-				if (phone != null) {
-					phones.add(phone);
-				}
-			}
-
-			String content = freeMarkerService.comment("dingding/assignee.ftl", data);
-
-			dingDingService.sendActionCard(summary, content, phones, ButtonName, issueUrl);
+			sendActionCard(webHookMessage, "dingding/assignee.ftl", false);
 		}
-
 	}
 
 	@Override
 	public void resolved(WebHookMessage webHookMessage) {
-		String summary = webHookMessage.getIssue().getFields().getSummary();
-
-		Map<String, Object> data = new HashMap<>();
-
-		String issueUrl = buildIssueUrlAndOther(data, webHookMessage);
-
-		User assignee = webHookMessage.getIssue().getFields().getAssignee();
-
-		UserProfile userProfile = configUserProfileRepository.findUserProfileByUsername(assignee.getName());
-
-		List<String> phones = new LinkedList<>();
-
-		if (userProfile != null) {
-			String phone = userProfile.getPhone();
-
-			if (phone != null) {
-				phones.add(phone);
-			}
-		}
-
-		String content = freeMarkerService.comment("dingding/resolved.ftl", data);
-
-		dingDingService.sendActionCard(summary, content, phones, ButtonName, issueUrl);
+		sendActionCard(webHookMessage, "dingding/resolved.ftl", true);
 	}
 
 	@Override
 	public void closed(WebHookMessage webHookMessage) {
-		String summary = webHookMessage.getIssue().getFields().getSummary();
-
-		Map<String, Object> data = new HashMap<>();
-
-		String issueUrl = buildIssueUrlAndOther(data, webHookMessage);
-
-		User assignee = webHookMessage.getIssue().getFields().getAssignee();
-
-		UserProfile userProfile = configUserProfileRepository.findUserProfileByUsername(assignee.getName());
-
-		List<String> phones = new LinkedList<>();
-
-		if (userProfile != null) {
-			String phone = userProfile.getPhone();
-
-			if (phone != null) {
-				phones.add(phone);
-			}
-		}
-
-		String content = freeMarkerService.comment("dingding/closed.ftl", data);
-
-		dingDingService.sendActionCard(summary, content, phones, ButtonName, issueUrl);
-
+		sendActionCard(webHookMessage, "dingding/closed.ftl", true);
 	}
 
 	@Override
 	public void reopened(WebHookMessage webHookMessage) {
+		sendActionCard(webHookMessage, "dingding/reopened.ftl", false);
+	}
+
+	@Override
+	public void generic(WebHookMessage webHookMessage) {
+		List<ChangeLogItem> changeLogItems = webHookMessage.getChangeLog().getItems();
+
+		for (ChangeLogItem changeLogItem : changeLogItems) {
+			if (changeLogItem.isStatusChangeLog()) {
+				if (changeLogItem.getToString().equals("Done")
+				&& !changeLogItem.getFromString().equals("Done")) {
+					sendActionCard(webHookMessage, "dingding/done.ftl", true);
+				}
+			}
+		}
+	}
+
+	private void sendActionCard(WebHookMessage webHookMessage, String templateName, boolean notifyAllUser) {
 		String summary = webHookMessage.getIssue().getFields().getSummary();
+
+
 
 		Map<String, Object> data = new HashMap<>();
 
 		String issueUrl = buildIssueUrlAndOther(data, webHookMessage);
 
-		User assignee = webHookMessage.getIssue().getFields().getAssignee();
+		String content = freeMarkerService.comment(templateName, data);
 
-		UserProfile userProfile = configUserProfileRepository.findUserProfileByUsername(assignee.getName());
 
-		List<String> phones = new LinkedList<>();
 
-		if (userProfile != null) {
-			String phone = userProfile.getPhone();
+		List<String> phones;
 
-			if (phone != null) {
-				phones.add(phone);
-			}
+		if (notifyAllUser) {
+			phones = buildAllPhones(webHookMessage);
+		} else {
+			phones = buildAssigneePhones(webHookMessage);
 		}
 
-		String content = freeMarkerService.comment("dingding/reopened.ftl", data);
-
 		dingDingService.sendActionCard(summary, content, phones, ButtonName, issueUrl);
-	}
 
-	@Override
-	public void generic(WebHookMessage webHookMessage) {
-		ChangeLog changeLog = webHookMessage.getChangeLog();
-
-		List<ChangeLogItem> changeLogItems = changeLog.getItems();
-
-		for (ChangeLogItem changeLogItem : changeLogItems) {
-
-			if (changeLogItem.isStatusChangeLog()) {
-				if (changeLogItem.getToString().equals("Done")
-				&& !changeLogItem.getFromString().equals("Done")) {
-					String summary = webHookMessage.getIssue().getFields().getSummary();
-
-					Map<String, Object> data = new HashMap<>();
-
-					String issueUrl = buildIssueUrlAndOther(data, webHookMessage);
-
-					Watches watches = watcherRepository.findWatches(webHookMessage.getIssue().getFields().getWatches());
-
-					List<String> phones = new LinkedList<>();
-
-					if (watches != null && watches.getIsWatching()) {
-
-						List<User> watchers = watches.getWatchers();
-
-						for (User watcher : watchers) {
-							UserProfile userProfile = configUserProfileRepository.findUserProfileByUsername(watcher.getName());
-
-							if (userProfile != null) {
-								String phone = userProfile.getPhone();
-
-								if (phone != null) {
-									phones.add(phone);
-								}
-							}
-						}
-					}
-
-					String content = freeMarkerService.comment("dingding/done.ftl", data);
-
-					dingDingService.sendActionCard(summary, content, phones, ButtonName, issueUrl);
-				}
-			}
+		if (logger.isDebugEnabled()) {
+			logger.debug("推送钉钉的内容：{}", content);
 		}
 	}
 
@@ -245,6 +134,47 @@ public class DingDingWebHookService implements ProviderWebHookService {
 
 		projectUrl = self.substring(0, self.indexOf("rest")) + "projects/" + key + "/summary";
 		return projectUrl;
+	}
+
+	private List<String> buildAllPhones(WebHookMessage webHookMessage) {
+		Watches watches = watcherRepository.findWatches(webHookMessage.getIssue().getFields().getWatches());
+
+		List<String> phones = new LinkedList<>();
+
+		if (watches != null && watches.getIsWatching()) {
+
+			List<User> watchers = watches.getWatchers();
+
+			for (User watcher : watchers) {
+				UserProfile userProfile = configUserProfileRepository.findUserProfileByUsername(watcher.getName());
+
+				if (userProfile != null) {
+					String phone = userProfile.getPhone();
+
+					if (phone != null) {
+						phones.add(phone);
+					}
+				}
+			}
+		}
+		return phones;
+	}
+
+	private List<String> buildAssigneePhones(WebHookMessage webHookMessage) {
+		User assignee = webHookMessage.getIssue().getFields().getAssignee();
+
+		UserProfile userProfile = configUserProfileRepository.findUserProfileByUsername(assignee.getName());
+
+		List<String> phones = new LinkedList<>();
+
+		if (userProfile != null) {
+			String phone = userProfile.getPhone();
+
+			if (phone != null) {
+				phones.add(phone);
+			}
+		}
+		return phones;
 	}
 
 	/* •••••••••••••••••••••••••••••••••••••••装••订••线••内••禁••止••作••答••否••则••记••零••分••••••••••••••••••••••••••••••••••••••• */
