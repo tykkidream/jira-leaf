@@ -1,5 +1,6 @@
 package org.tykkidream.jira.webhook.application;
 
+import org.tykkidream.jira.core.domain.service.IssueEventTypeDomainService;
 import org.tykkidream.jira.webhook.configuration.MyConfiguration;
 import org.tykkidream.jira.core.domain.model.jira.WebHookEvent;
 import org.tykkidream.jira.core.domain.model.jira.WebHookMessage;
@@ -13,6 +14,9 @@ public class JiraApplicationService {
 
 	@Resource
 	private ProviderWebHookService providerWebHookService;
+
+	@Resource
+	private IssueEventTypeDomainService issueEventTypeDomainService;
 
 	@Resource
 	private MyConfiguration myConfiguration;
@@ -32,8 +36,7 @@ public class JiraApplicationService {
 			return;
 		} else if (webhookEvent.isJiraIssueUpdated()) {
 			// 问题相关事件
-
-			IssueEventType issueEventType = webHookMessage.getIssueEventType();
+			IssueEventType issueEventType = issueEventTypeDomainService.analysis(webHookMessage);
 
 			if (issueEventType.isNone()) {
 				// 未知的问题事件

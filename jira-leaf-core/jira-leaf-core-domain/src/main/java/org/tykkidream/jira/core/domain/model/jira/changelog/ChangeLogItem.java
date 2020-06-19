@@ -44,6 +44,23 @@ public class ChangeLogItem {
 		return field.equals("status");
 	}
 
+	public boolean isStatusChangeToDone() {
+		return toString.equals("Done") && !from.equals("Done");
+	}
+
+	public boolean isStatusChangeToResolved() {
+		return toString.equals("Resolved") && !from.equals("Resolved");
+	}
+
+	public boolean isStatusChangeToClosed() {
+		return toString.equals("Closed") && !from.equals("Closed");
+	}
+
+	public boolean isStatusChangeToReopened() {
+		return toString.equals("Reopened") && !from.equals("Reopened");
+	}
+
+
 	/**
 	 * resolution 解决信息字段被修改
 	 * @return

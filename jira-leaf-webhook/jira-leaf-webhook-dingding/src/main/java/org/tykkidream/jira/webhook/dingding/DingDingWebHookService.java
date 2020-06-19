@@ -42,10 +42,27 @@ public class DingDingWebHookService implements ProviderWebHookService {
 
 	@Override
 	public void changeLog(WebHookMessage webHookMessage) {
-		ChangeLogItem changeLogItem = webHookMessage.getChangeLog().getItems().get(0);
+		generic(webHookMessage);
+	}
 
+	private void changeLog(WebHookMessage webHookMessage, ChangeLogItem changeLogItem) {
 		if (changeLogItem.isAssigneeChangeLog()) {
 			sendActionCard(webHookMessage, "dingding/assignee.ftl", false);
+		}
+
+		if (changeLogItem.isStatusChangeLog()) {
+			if (changeLogItem.isStatusChangeToDone()) {
+				sendActionCard(webHookMessage, "dingding/done.ftl", true);
+			}
+			if (changeLogItem.isStatusChangeToResolved()) {
+				sendActionCard(webHookMessage, "dingding/resolved.ftl", true);
+			}
+			if (changeLogItem.isStatusChangeToClosed()) {
+				sendActionCard(webHookMessage, "dingding/closed.ftl", true);
+			}
+			if (changeLogItem.isStatusChangeToReopened()) {
+				sendActionCard(webHookMessage, "dingding/reopened.ftl", true);
+			}
 		}
 	}
 
@@ -69,15 +86,17 @@ public class DingDingWebHookService implements ProviderWebHookService {
 		List<ChangeLogItem> changeLogItems = webHookMessage.getChangeLog().getItems();
 
 		for (ChangeLogItem changeLogItem : changeLogItems) {
-			if (changeLogItem.isStatusChangeLog()) {
-				if (changeLogItem.getToString().equals("Done")
-				&& !changeLogItem.getFromString().equals("Done")) {
-					sendActionCard(webHookMessage, "dingding/done.ftl", true);
-				}
-			}
+			changeLog(webHookMessage, changeLogItem);
 		}
 	}
 
+	/**
+	 * 通用的发送 ActionCard 类型消息
+	 *
+	 * @param webHookMessage
+	 * @param templateName
+	 * @param notifyAllUser
+	 */
 	private void sendActionCard(WebHookMessage webHookMessage, String templateName, boolean notifyAllUser) {
 		String summary = webHookMessage.getIssue().getFields().getSummary();
 
@@ -118,6 +137,12 @@ public class DingDingWebHookService implements ProviderWebHookService {
 		return issueUrl;
 	}
 
+	/**
+	 * 构建问题访问地址
+	 *
+	 * @param webHookMessage
+	 * @return
+	 */
 	private String buildIssueUrl(WebHookMessage webHookMessage) {
 		String issueUrl;
 		String self = webHookMessage.getIssue().getSelf();
@@ -127,6 +152,12 @@ public class DingDingWebHookService implements ProviderWebHookService {
 		return issueUrl;
 	}
 
+	/**
+	 * 构建项目访问地址
+	 *
+	 * @param webHookMessage
+	 * @return
+	 */
 	private String buildProjectUrl(WebHookMessage webHookMessage) {
 		String projectUrl;
 		String self = webHookMessage.getIssue().getFields().getProject().getSelf();
@@ -136,6 +167,12 @@ public class DingDingWebHookService implements ProviderWebHookService {
 		return projectUrl;
 	}
 
+	/**
+	 * 构建补 At 人，关注人的手机号
+	 *
+	 * @param webHookMessage
+	 * @return
+	 */
 	private List<String> buildAllPhones(WebHookMessage webHookMessage) {
 		Watches watches = watcherRepository.findWatches(webHookMessage.getIssue().getFields().getWatches());
 
@@ -160,6 +197,11 @@ public class DingDingWebHookService implements ProviderWebHookService {
 		return phones;
 	}
 
+	/**
+	 * 构建补 At 人，分配人的手机号
+	 * @param webHookMessage
+	 * @return
+	 */
 	private List<String> buildAssigneePhones(WebHookMessage webHookMessage) {
 		User assignee = webHookMessage.getIssue().getFields().getAssignee();
 
